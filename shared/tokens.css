@@ -1,0 +1,82 @@
+/* Metolius Homepage v1 — shared design tokens
+ * Source: Metolius Website Strategy & Build Brief (Nicola Troman-Green, Nov 2026)
+ * Palette, type scale, and spacing are literal to the brief.
+ */
+
+:root {
+  /* ---------- Brand palette (from brief §2) ---------- */
+  --navy:        #052446;
+  --blue:        #0164CB;
+  --cyan:        #00AEE6;
+  --aqua:        #45E9FE;
+  --mint:        #A0E4BC;
+  --pale-green:  #BFE5B9;
+  --warm-sun:    #FCE5B0;
+
+  /* Neutrals (derived, disciplined) */
+  --ink:         #0B1A2E;   /* body on white */
+  --ink-2:       #2B3A4E;   /* secondary body */
+  --ink-3:       #5B6B80;   /* tertiary / meta */
+  --line:        #E1E7EE;   /* hairlines */
+  --surface:     #FFFFFF;
+  --surface-2:   #F6F9FC;   /* soft neutral panel */
+  --surface-3:   #EDF3F8;   /* deeper neutral panel */
+  --navy-tint:   #E8EEF6;   /* navy @ ~8% on white */
+
+  /* Semantic colour */
+  --accent:         var(--blue);
+  --accent-hover:   #014FAC;
+  --accent-ink:     #FFFFFF;
+  --accent-soft:    #E5EEFB;
+
+  --focus-ring:     #0164CB;
+  --focus-ring-offset: #FFFFFF;
+
+  --status-complete:  #2E8E5A;
+  --status-progress:  #0164CB;
+  --status-attention: #D97B2A;
+
+  /* ---------- Type (Plus Jakarta Sans, from brief §2) ---------- */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Desktop scale (brief literal) */
+  --t-hero:        56px;   /* 52–58 → 56 */
+  --t-hero-lh:     1.08;
+  --t-hero-sub:    21px;   /* 20–22 → 21 */
+  --t-hero-sub-lh: 1.45;
+  --t-section:     40px;   /* 36–42 → 40 */
+  --t-section-lh:  1.15;
+  --t-section-sub: 19px;   /* 18–20 → 19 */
+  --t-card-h:      22px;   /* 20–24 → 22 */
+  --t-body:        17.5px; /* 17–18 → 17.5 */
+  --t-body-lh:     1.55;
+  --t-nav:         15.5px; /* 15–17 */
+  --t-meta:        14px;
+  --t-eyebrow:     13px;
+
+  /* ---------- Spacing / layout ---------- */
+  --container:     1200px;      /* content column */
+  --gutter:        32px;
+  --radius-sm:     6px;
+  --radius:        10px;
+  --radius-lg:     16px;
+  --radius-xl:     24px;
+
+  --shadow-1: 0 1px 2px rgba(5, 36, 70, 0.04), 0 1px 1px rgba(5, 36, 70, 0.04);
+  --shadow-2: 0 6px 20px -8px rgba(5, 36, 70, 0.14), 0 2px 6px -2px rgba(5, 36, 70, 0.06);
+  --shadow-3: 0 24px 48px -16px rgba(5, 36, 70, 0.18), 0 8px 20px -8px rgba(5, 36, 70, 0.08);
+
+  /* Motion */
+  --motion-fast:  180ms;
+  --motion-base:  240ms;
+  --motion-slow:  420ms;
+  --ease-out:     cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-slow: 0ms;
+  }
+}

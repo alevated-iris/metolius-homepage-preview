@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Metolius homepage — three tonal directions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/tokens.css">
+  <link rel="stylesheet" href="shared/base.css">
+  <style>
+    body { background: var(--surface-2); }
+    .top {
+      background: var(--navy);
+      color: #FFFFFF;
+      padding: 56px 0 72px;
+    }
+    .top h1 { color: #FFFFFF; font-size: 44px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; max-width: 22ch; margin: 0 0 20px; }
+    .top p { color: #AFC1D6; font-size: 19px; line-height: 1.55; max-width: 62ch; margin: 0; }
+    .top__meta { margin-top: 32px; display: flex; gap: 32px; color: #7FA8D8; font-size: 13.5px; }
+    .top__meta strong { color: #FFFFFF; font-weight: 700; margin-right: 6px; }
+
+    .intro {
+      padding: 72px 0 24px;
+    }
+    .intro__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+    .intro h2 { font-size: 28px; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 18px; max-width: 24ch; }
+    .intro p { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
+    .intro p + p { margin-top: 16px; }
+
+    .cards { padding: 64px 0 112px; }
+    .cards__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--motion-base) var(--ease-out),
+                  box-shadow var(--motion-base) var(--ease-out);
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-3); }
+    .card__preview {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+      display: block;
+    }
+    .card__preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .card__body { padding: 28px 28px 32px; }
+    .card__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ink-3);
+      margin-bottom: 14px;
+    }
+    .card__eyebrow .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .card--A .card__eyebrow .dot { background: var(--cyan); }
+    .card--B .card__eyebrow .dot { background: #D97B2A; }
+    .card--C .card__eyebrow .dot { background: var(--mint); }
+    .card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 12px; }
+    .card p { font-size: 15.5px; line-height: 1.55; color: var(--ink-2); margin: 0 0 16px; }
+    .card__quote {
+      margin: 16px 0 20px;
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      font-size: 14.5px;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.45;
+      background: var(--surface-2);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .card--A .card__quote { border-left-color: var(--cyan); }
+    .card--B .card__quote { border-left-color: #D97B2A; }
+    .card--C .card__quote { border-left-color: var(--mint); }
+
+    .card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 0 0 20px;
+      padding: 14px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    .card__meta div {
+      font-size: 12px;
+      color: var(--ink-3);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .card__meta strong {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    .card__cta { margin-top: auto; }
+    .card__cta .btn { width: 100%; justify-content: center; }
+
+    /* What they share */
+    .shared {
+      background: #FFFFFF;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 88px 0;
+    }
+    .shared h2 { font-size: 32px; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 16px; max-width: 24ch; }
+    .shared__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+    .shared__item { padding: 24px; border-radius: var(--radius); background: var(--surface-2); }
+    .shared__item h4 { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; margin: 0 0 8px; color: var(--ink); }
+    .shared__item p { font-size: 14.5px; line-height: 1.55; color: var(--ink-2); margin: 0; }
+
+    .next {
+      padding: 88px 0;
+      background: linear-gradient(180deg, #FFFFFF 0%, var(--surface-2) 100%);
+    }
+    .next h2 { font-size: 32px; letter-spacing: -0.015em; line-height: 1.2; margin: 0 0 16px; max-width: 26ch; }
+    .next p { font-size: 17px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
+    .next ul { margin: 24px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .next li {
+      padding: 20px 24px;
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 15.5px;
+      color: var(--ink-2);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .next li::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+    .next strong { color: var(--ink); font-weight: 600; }
+
+    .signature {
+      padding: 56px 0 72px;
+      text-align: center;
+      color: var(--ink-3);
+      font-size: 14px;
+    }
+    .signature a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<section class="top">
+  <div class="container">
+    <div style="display:flex; align-items:center; gap:14px; margin-bottom:28px;">
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M8 36 L18 20 L24 28 L32 16 L40 36 Z" fill="#A0E4BC"/>
+        <circle cx="36" cy="12" r="5" fill="#FCE5B0"/>
+        <path d="M4 40 C14 36, 22 42, 34 38 C40 36, 44 40, 44 40 L44 44 L4 44 Z" fill="#00AEE6"/>
+      </svg>
+      <span style="color:#7FA8D8; letter-spacing:0.1em; text-transform:uppercase; font-size:12.5px; font-weight:700;">Metolius homepage · wireframe v2 · three tonal directions</span>
+    </div>
+    <h1>Three ways the Metolius homepage could open.</h1>
+    <p>Same structural fix across all three — product and category get named in the first screen, no two-scroll wait for the "what is this" moment. What changes between the three is the voice leading the top of the page, mapped to three of the four audience voices in your brief.</p>
+    <div class="top__meta">
+      <div><strong>For</strong>Nicola Troman-Green</div>
+      <div><strong>From</strong>Max, design engineer</div>
+      <div><strong>Status</strong>Preview — not yet live</div>
+      <div><strong>Built in</strong>HTML/CSS @1440px · Plus Jakarta Sans · Metolius palette</div>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="container">
+    <div class="intro__grid">
+      <div>
+        <h2>The structural fix is the same across all three.</h2>
+        <p>Your critique — "we detail what we do too late, too many fluffy marketing titles before getting to the business" — maps cleanly onto the brief's own discipline: <em>clarity takes priority over cleverness</em>. So all three wireframes get to what Metolius actually does inside the first screen. No "Provider readiness, simplified" working alone up top with the explanation two scrolls down.</p>
+        <p>The 9-section architecture your brief proposes (recognize → route → see the work → people → confidence → next step) is the same in each. Copy voice, hero composition, and section emphasis are what differ.</p>
+      </div>
+      <div>
+        <h2>What changes is the voice leading the top of the page.</h2>
+        <p>Each direction leads with one of the four voices the brand brief defines — Product, Credentialer, or Enterprise/Brand — and shifts the hero composition to serve that voice. The fourth voice (Advisory) lives in the Insights section and sits inside each direction rather than leading one.</p>
+        <p>Full homepage stacks below, hero → final CTA. Not just three hero crops. Each one is a complete tonal take so you can read them as alternatives, not variations on one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cards">
+  <div class="container">
+    <div class="cards__grid">
+
+      <!-- Direction A -->
+      <div class="card card--A">
+        <a class="card__preview" href="A-product/index.html" target="_blank" rel="noopener">
+          <img src="assets/preview-A-product-hero.png" alt="Direction A hero preview: product-led, with a live credentialing status table">
+        </a>
+        <div class="card__body">
+          <span class="card__eyebrow"><span class="dot"></span>Direction A · Product voice</span>
+          <h3>See the work first.</h3>
+          <p>Hero puts the product UI front and centre — a live provider readiness table, named providers, real statuses, real payers. The 5-second answer is a picture, not a sentence.</p>
+          <div class="card__quote">"See every provider&rsquo;s credentialing status in one place."</div>
+          <div class="card__meta">
+            <div><strong>Sharpest for</strong>Self-directed evaluators</div>
+            <div><strong>Market cue</strong>Juvonno-style product-forward</div>
+            <div><strong>Watch out</strong>Can read "SaaS-default" if copy doesn&rsquo;t breathe</div>
+          </div>
+          <div class="card__cta">
+            <a class="btn btn--primary" href="A-product/index.html" target="_blank" rel="noopener">Open Direction A &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction B -->
+      <div class="card card--B">
+        <a class="card__preview" href="B-credentialer/index.html" target="_blank" rel="noopener">
+          <img src="assets/preview-B-credentialer-hero.png" alt="Direction B hero preview: credentialer-led, with chaotic inbox vs clean Metolius queue">
+        </a>
+        <div class="card__body">
+          <span class="card__eyebrow"><span class="dot"></span>Direction B · Credentialer voice</span>
+          <h3>Recognition first.</h3>
+          <p>Hero stages the before/after: the chaotic inbox the credentialer actually lives in, next to the Metolius readiness view. Warmth, empathy, the "sharks&rsquo; teeth, Diana&rsquo;s smile" register. Sets up the <em>Email That Never Came</em> campaign activation.</p>
+          <div class="card__quote">"Same job. Fewer firefights."</div>
+          <div class="card__meta">
+            <div><strong>Sharpest for</strong>Credentialers &amp; ops managers</div>
+            <div><strong>Market cue</strong>Campaign-aware brand</div>
+            <div><strong>Watch out</strong>Warmth without enough mechanism up top</div>
+          </div>
+          <div class="card__cta">
+            <a class="btn btn--primary" href="B-credentialer/index.html" target="_blank" rel="noopener">Open Direction B &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Direction C -->
+      <div class="card card--C">
+        <a class="card__preview" href="C-enterprise/index.html" target="_blank" rel="noopener">
+          <img src="assets/preview-C-enterprise-hero.png" alt="Direction C hero preview: enterprise-led, dark brand hero with provider readiness framing">
+        </a>
+        <div class="card__body">
+          <span class="card__eyebrow"><span class="dot"></span>Direction C · Enterprise voice</span>
+          <h3>Reframe the category.</h3>
+          <p>Hero moves the conversation off "credentialing software" and onto "provider readiness as an operating responsibility." Dark, brand-forward, proof-heavy. The Modio counter — ground where they don&rsquo;t currently lead.</p>
+          <div class="card__quote">"A clearer way forward for the work that keeps healthcare running."</div>
+          <div class="card__meta">
+            <div><strong>Sharpest for</strong>C-suite, multi-site buyers</div>
+            <div><strong>Market cue</strong>DataSpring + Bloomreach reframe</div>
+            <div><strong>Watch out</strong>Abstract hero; needs concrete subhead</div>
+          </div>
+          <div class="card__cta">
+            <a class="btn btn--primary" href="C-enterprise/index.html" target="_blank" rel="noopener">Open Direction C &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="shared">
+  <div class="container">
+    <span class="kicker">What&rsquo;s the same in all three</span>
+    <h2>Common scaffolding, so you&rsquo;re comparing tone — not three different sites.</h2>
+    <div class="shared__grid">
+      <div class="shared__item">
+        <h4>Design system</h4>
+        <p>Metolius palette (navy, blue, cyan, aqua, mint, pale green, warm sun). Plus Jakarta Sans. Sentence case. Type scale literal to the brief. No invented brand colours or fictional dashboards.</p>
+      </div>
+      <div class="shared__item">
+        <h4>Information architecture</h4>
+        <p>Same 9-ish sections per the brief: recognise → route → see the work → people/intelligence → leadership view → proof &amp; trust → final CTA. The route cards cover the four Solutions in the brief&rsquo;s nav.</p>
+      </div>
+      <div class="shared__item">
+        <h4>Hero rules I held across all three</h4>
+        <p>Product named within the first screen. Plain-language product anchor. Primary + secondary CTA from the journey-led CTA architecture in the brief, not "Book a demo."</p>
+      </div>
+      <div class="shared__item">
+        <h4>Real product UI, not stock</h4>
+        <p>Every "see the product" section uses realistic Metolius interface treatments — provider rows, status pills, pipeline counts, exec dashboard. Clearly conceptual, replaceable with real screens before publication.</p>
+      </div>
+      <div class="shared__item">
+        <h4>Accessibility floor</h4>
+        <p>Focus-visible rings on every interactive. prefers-reduced-motion respected. Status pills use shape + colour, not colour alone. Contrast pairs chosen so AA minimums hold even in the dark sections.</p>
+      </div>
+      <div class="shared__item">
+        <h4>SEO guard rails</h4>
+        <p>Each hero is built around one primary search intent — platform in A, credentialing workflow in B, provider readiness in C. Full keyword strategy is a separate conversation after a direction is locked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="container">
+    <span class="kicker">Next</span>
+    <h2>What I&rsquo;m hoping to hear back from you.</h2>
+    <p>These are low-fidelity wireframes — enough to react to tone and architecture, not to approve for build. Once a direction is locked, the next pass closes copy and adds mobile + the remaining nav pages (Platform, Credentialing, Managed services).</p>
+    <ul>
+      <li><strong>Pick a direction (or a hybrid).</strong> It&rsquo;s fine to say "B&rsquo;s hero + C&rsquo;s reframe section + A&rsquo;s leadership view." That&rsquo;s useful signal.</li>
+      <li><strong>Call out any copy that lands wrong.</strong> Especially the hero line and the perspective quotes. These are drafted against the brief but will benefit from your eye.</li>
+      <li><strong>Flag anything missing.</strong> The brief&rsquo;s section-by-section guidance is dense; I&rsquo;ve consolidated where it felt redundant. Let me know if I cut something you needed.</li>
+      <li><strong>Those 5 Google Docs.</strong> They&rsquo;re still returning "file not found" for me — can you share them with max@alevated.com? I want the ICP/ECP and customer-journey detail folded into the next pass.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="signature">
+  <div class="container">
+    Metolius Health homepage — wireframe v2 — built for Nicola Troman-Green — <a href="mailto:max@alevated.com">max@alevated.com</a>
+  </div>
+</section>
+
+<script>
+  // Hide the direction badge on this overview page (it's only for the direction pages themselves).
+</script>
+</body>
+</html>

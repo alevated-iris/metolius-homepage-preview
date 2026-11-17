@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Metolius — Direction A: Product voice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <style>
+    /* Direction A specifics — product-led hero uses the product UI as the primary visual. */
+    .hero-A {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #F6F9FC 0%, #FFFFFF 70%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-A .container { position: relative; }
+    .hero-A__grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-A__ui {
+      position: relative;
+      transform: perspective(1400px) rotateY(-5deg) rotateX(1deg);
+      transform-origin: left center;
+      padding: 8px 0 20px;
+    }
+    .hero-A__ui-callout {
+      position: absolute;
+      padding: 10px 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: var(--shadow-2);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-A__ui-callout::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+    }
+    .hero-A__ui-callout--1 { top: -20px; right: 32px; }
+    .hero-A__ui-callout--2 { bottom: -22px; left: 32px; background: var(--warm-sun); border-color: #E5C27A; }
+    .hero-A__ui-callout--2::before { background: var(--status-attention); }
+  </style>
+</head>
+<body data-direction="A" data-direction-name="Product-led — see the work first">
+<div id="nav-mount"></div>
+
+<!-- ============ HERO (Product voice) ============ -->
+<section class="hero-A section--hero">
+  <div class="container">
+    <div class="hero-A__grid">
+      <div>
+        <span class="kicker">The Metolius platform</span>
+        <h1 class="hero-h">See every provider&rsquo;s credentialing status in one place.</h1>
+        <p class="hero-sub">
+          Credentialing, enrollment and recredentialing &mdash; the full picture of what&rsquo;s complete, what&rsquo;s outstanding, and what needs attention. In one place. For the whole team.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#platform">See how Metolius works</a>
+          <a class="btn btn--ghost" href="#cta">Explore the platform</a>
+        </div>
+        <div style="margin-top:36px; display:flex; gap:28px; color:var(--ink-3); font-size:13px; letter-spacing:0.04em;">
+          <span>SOC 2 Type II</span>
+          <span>HIPAA aligned</span>
+          <span>HITRUST in progress</span>
+        </div>
+      </div>
+      <div class="hero-A__ui">
+        <div class="ui-card">
+          <div class="ui-card__header">
+            <div class="ui-card__title">Provider readiness · 248 active</div>
+            <div class="ui-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="ui-row ui-row--head">
+            <div>Provider</div><div>Payer</div><div>Stage</div><div>Status</div><div>Due</div>
+          </div>
+          <div class="ui-row">
+            <div class="ui-provider"><span class="ui-avatar">RS</span><div><div style="font-weight:600;">Rachel Soto, MD</div><div style="color:var(--ink-3); font-size:12px;">Internal Medicine</div></div></div>
+            <div>Aetna</div>
+            <div>Credentialing</div>
+            <div><span class="pill pill--complete">Complete</span></div>
+            <div style="color:var(--ink-3);">—</div>
+          </div>
+          <div class="ui-row">
+            <div class="ui-provider"><span class="ui-avatar ui-avatar--b">DK</span><div><div style="font-weight:600;">David Kwon, DO</div><div style="color:var(--ink-3); font-size:12px;">Cardiology</div></div></div>
+            <div>BCBS WA</div>
+            <div>Enrollment</div>
+            <div><span class="pill pill--progress">In progress</span></div>
+            <div>Nov 24</div>
+          </div>
+          <div class="ui-row">
+            <div class="ui-provider"><span class="ui-avatar ui-avatar--c">MP</span><div><div style="font-weight:600;">Maya Patel, NP</div><div style="color:var(--ink-3); font-size:12px;">Primary Care</div></div></div>
+            <div>Cigna</div>
+            <div>Recredentialing</div>
+            <div><span class="pill pill--attention">Needs attention</span></div>
+            <div style="color:var(--status-attention); font-weight:600;">Overdue 3d</div>
+          </div>
+          <div class="ui-row">
+            <div class="ui-provider"><span class="ui-avatar ui-avatar--d">JT</span><div><div style="font-weight:600;">Jordan Tilley, MD</div><div style="color:var(--ink-3); font-size:12px;">Orthopedics</div></div></div>
+            <div>UHC</div>
+            <div>Verification</div>
+            <div><span class="pill pill--progress">In progress</span></div>
+            <div>Dec 02</div>
+          </div>
+          <div class="ui-row">
+            <div class="ui-provider"><span class="ui-avatar">LM</span><div><div style="font-weight:600;">Lena Mora, MD</div><div style="color:var(--ink-3); font-size:12px;">Pediatrics</div></div></div>
+            <div>Molina</div>
+            <div>Credentialing</div>
+            <div><span class="pill pill--complete">Complete</span></div>
+            <div style="color:var(--ink-3);">—</div>
+          </div>
+        </div>
+        <div class="hero-A__ui-callout hero-A__ui-callout--1">Status updated · 2 min ago</div>
+        <div class="hero-A__ui-callout hero-A__ui-callout--2">3 items need attention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 — Introduction / product anchor ============ -->
+<section class="section section--tight">
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <span class="eyebrow">What Metolius is</span>
+        <h2 class="section-h">The operating system for provider readiness.</h2>
+      </div>
+      <div>
+        <p style="font-size:19px; line-height:1.55; color:var(--ink-2); max-width:54ch; margin:0;">
+          Behind every provider is a process involving people, information,
+          approvals and deadlines. When those pieces aren&rsquo;t connected, even
+          a simple question becomes a search mission.
+        </p>
+        <p style="font-size:19px; line-height:1.55; color:var(--ink-2); max-width:54ch; margin:16px 0 0;">
+          Metolius brings the work into one place — so your team spends less time
+          piecing information together, and more time making decisions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 3 — Workflow / see the work ============ -->
+<section id="platform" class="section section--soft">
+  <div class="container">
+    <div class="section-intro" style="max-width:720px; margin-bottom:56px;">
+      <span class="kicker">See the work</span>
+      <h2 class="section-h">Know what&rsquo;s complete. What&rsquo;s outstanding. What needs attention.</h2>
+      <p class="section-sub">
+        One connected workflow across credentialing, enrollment, verification
+        and recredentialing. Status without a spreadsheet. Updates without an
+        email chain.
+      </p>
+    </div>
+
+    <div class="ui-card" style="max-width:none;">
+      <div class="ui-card__header">
+        <div class="ui-card__title">Workflow · Credentialing pipeline — Q4 cohort</div>
+        <div style="display:flex; gap:8px;">
+          <span class="pill pill--complete">42 Complete</span>
+          <span class="pill pill--progress">87 In progress</span>
+          <span class="pill pill--attention">12 Needs attention</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:1px; background:var(--line);">
+        <div style="padding:20px; background:#FFF;">
+          <div style="font-size:11px; color:var(--ink-3); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Application</div>
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em;">141</div>
+          <div class="progress" style="margin-top:12px;"><span style="width:100%; background:var(--status-complete);"></span></div>
+        </div>
+        <div style="padding:20px; background:#FFF;">
+          <div style="font-size:11px; color:var(--ink-3); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Verification</div>
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em;">98</div>
+          <div class="progress" style="margin-top:12px;"><span style="width:76%;"></span></div>
+        </div>
+        <div style="padding:20px; background:#FFF;">
+          <div style="font-size:11px; color:var(--ink-3); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Payer enrollment</div>
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em;">64</div>
+          <div class="progress" style="margin-top:12px;"><span style="width:52%;"></span></div>
+        </div>
+        <div style="padding:20px; background:#FFF;">
+          <div style="font-size:11px; color:var(--ink-3); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Approved</div>
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em;">42</div>
+          <div class="progress" style="margin-top:12px;"><span style="width:34%;"></span></div>
+        </div>
+        <div style="padding:20px; background:#FFF;">
+          <div style="font-size:11px; color:var(--ink-3); letter-spacing:0.06em; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Needs attention</div>
+          <div style="font-size:28px; font-weight:700; letter-spacing:-0.02em; color:var(--status-attention);">12</div>
+          <div class="progress" style="margin-top:12px;"><span style="width:14%; background:var(--status-attention);"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-grid feature-grid--4" style="margin-top:48px;">
+      <div class="feature feature--filled">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <h3 class="card-h">See what matters</h3>
+        <p>Know what&rsquo;s complete and what still needs attention.</p>
+      </div>
+      <div class="feature feature--filled">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+        <h3 class="card-h">Keep work moving</h3>
+        <p>Tasks, deadlines and follow-ups in one place.</p>
+      </div>
+      <div class="feature feature--filled">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="11" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-3 4-3s4 1 4 3"/></svg></div>
+        <h3 class="card-h">Stay connected</h3>
+        <p>A shared view of provider progress across the team.</p>
+      </div>
+      <div class="feature feature--filled">
+        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V6M10 18v-7M16 18V9M22 18v-4"/></svg></div>
+        <h3 class="card-h">Decide with context</h3>
+        <p>Understand the work without chasing updates.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 4 — Audience routing ============ -->
+<section id="solutions" class="section">
+  <div class="container">
+    <div class="section-intro section-intro--center">
+      <span class="kicker">Choose your route</span>
+      <h2 class="section-h">Technology, managed expertise, or both.</h2>
+      <p class="section-sub">Every organization works differently. Metolius gives you options — not a prescription.</p>
+    </div>
+    <div class="route-grid">
+      <a class="route" href="#">
+        <span class="route__eyebrow">For credentialing teams</span>
+        <h3>Credentialing &amp; enrollment technology</h3>
+        <p>Bring provider information, tasks and progress into one place. Give your team the tools to manage credentialing with greater visibility and control.</p>
+        <span class="btn btn--link">Explore the platform</span>
+      </a>
+      <a class="route" href="#">
+        <span class="route__eyebrow">For operations leaders</span>
+        <h3>Managed credentialing services</h3>
+        <p>Work with experienced credentialing professionals who understand the detail, deadlines and demands of keeping providers ready.</p>
+        <span class="btn btn--link">Explore managed services</span>
+      </a>
+      <a class="route" href="#">
+        <span class="route__eyebrow">For CFOs &amp; finance</span>
+        <h3>Revenue cycle management</h3>
+        <p>Support the financial side of healthcare operations with services that help manage billing, claims and reimbursement.</p>
+        <span class="btn btn--link">Explore revenue cycle</span>
+      </a>
+      <a class="route" href="#">
+        <span class="route__eyebrow">For enterprise healthcare</span>
+        <h3>Enterprise provider readiness</h3>
+        <p>A leadership-level operating model for provider readiness across multi-site organizations and health systems.</p>
+        <span class="btn btn--link">Request a briefing</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 5 — People + technology ============ -->
+<section id="who" class="section section--soft">
+  <div class="container">
+    <div class="grid-7-5">
+      <div>
+        <span class="kicker">People and technology</span>
+        <h2 class="section-h">Technology surfaces what matters. Experience decides what happens next.</h2>
+        <p class="section-sub">
+          Credentialing is detailed work. It takes knowledge, good judgment and an
+          understanding of how healthcare organizations operate. Metolius combines
+          technology with the experience of people who know this work — whether
+          you&rsquo;re using our platform or working directly with our team.
+        </p>
+        <a class="btn btn--link" href="#">Get to know Metolius</a>
+      </div>
+      <div>
+        <div class="photo photo--people"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 6 — Intelligence (perspective) ============ -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="grid-5-7">
+      <div>
+        <span class="kicker" style="color:#7FA8D8;">Intelligence that behaves</span>
+        <h2 class="section-h">AI can identify an exception. Experience still decides what to do about it.</h2>
+        <p class="section-sub">
+          Metolius surfaces outstanding actions, approaching deadlines and areas
+          that need a closer look. The system notices. Your team decides.
+        </p>
+      </div>
+      <div>
+        <div class="ui-card" style="background:#0A2F58; border-color:#153E6B;">
+          <div class="ui-card__header" style="background:#0A2F58; border-color:#153E6B;">
+            <div class="ui-card__title" style="color:#FFF;">Needs attention · Prioritized</div>
+            <div class="ui-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div style="padding: 0 20px;">
+            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="color:#FFF; font-weight:600;">Payer response overdue</div>
+                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">BCBS WA · 3 providers · last contact 11 days ago</div>
+              </div>
+              <span class="pill pill--attention">High</span>
+            </div>
+            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="color:#FFF; font-weight:600;">License expiring in 14 days</div>
+                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">Dr. Patel · renewal not yet submitted</div>
+              </div>
+              <span class="pill pill--attention">High</span>
+            </div>
+            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="color:#FFF; font-weight:600;">Verification mismatch</div>
+                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">Primary source data doesn&rsquo;t match application</div>
+              </div>
+              <span class="pill pill--progress">Review</span>
+            </div>
+            <div style="padding:18px 0; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="color:#FFF; font-weight:600;">New provider roster upload</div>
+                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">12 providers added · assign owners</div>
+              </div>
+              <span class="pill pill--progress">Review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 7 — Leadership view ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-intro section-intro--center">
+      <span class="kicker">Leadership view</span>
+      <h2 class="section-h">The bigger picture, without the reporting marathon.</h2>
+      <p class="section-sub">
+        Provider readiness, outstanding work and operational exposure — shown
+        at the right altitude for the people answering the question.
+      </p>
+    </div>
+    <div class="ui-card">
+      <div class="ui-card__header">
+        <div class="ui-card__title">Provider readiness · Dashboard</div>
+        <div style="display:flex; gap:12px; font-size:13px; color:var(--ink-3);">
+          <span>Last updated 4 min ago</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:1px; background:var(--line);">
+        <div style="padding:28px; background:#FFF;">
+          <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Ready to work</div>
+          <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">94%</div>
+          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">▲ 2.1% vs Oct</div>
+        </div>
+        <div style="padding:28px; background:#FFF;">
+          <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Cycle time (avg)</div>
+          <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">38d</div>
+          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">▼ 6d vs Q3</div>
+        </div>
+        <div style="padding:28px; background:#FFF;">
+          <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Revenue exposure</div>
+          <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">$284k</div>
+          <div style="font-size:13px; color:var(--status-attention); margin-top:6px;">12 providers pending</div>
+        </div>
+        <div style="padding:28px; background:#FFF;">
+          <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Expiring in 30d</div>
+          <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">18</div>
+          <div style="font-size:13px; color:var(--ink-3); margin-top:6px;">8 licenses · 10 payer enrollments</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 8 — Proof / trust ============ -->
+<section id="why" class="section section--soft">
+  <div class="container">
+    <div class="section-intro section-intro--center">
+      <span class="kicker">Proof</span>
+      <h2 class="section-h">Experience matters. So does trust.</h2>
+      <p class="section-sub">Healthcare organizations rely on accurate information, dependable processes and people who understand the responsibility that comes with the work.</p>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:24px;">
+      <div class="feature">
+        <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:12px;">Security</div>
+        <div style="font-size:18px; font-weight:600;">SOC 2 Type II</div>
+        <div style="font-size:14px; color:var(--ink-3); margin-top:4px;">Audited annually</div>
+      </div>
+      <div class="feature">
+        <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:12px;">Privacy</div>
+        <div style="font-size:18px; font-weight:600;">HIPAA aligned</div>
+        <div style="font-size:14px; color:var(--ink-3); margin-top:4px;">PHI handled to policy</div>
+      </div>
+      <div class="feature">
+        <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:12px;">Heritage</div>
+        <div style="font-size:18px; font-weight:600;">25+ years</div>
+        <div style="font-size:14px; color:var(--ink-3); margin-top:4px;">In healthcare operations</div>
+      </div>
+      <div class="feature">
+        <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:12px;">Implementation</div>
+        <div style="font-size:18px; font-weight:600;">Guided onboarding</div>
+        <div style="font-size:14px; color:var(--ink-3); margin-top:4px;">Your team isn&rsquo;t on their own</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 9 — Final CTA ============ -->
+<section id="cta" class="section section--dark">
+  <div class="container">
+    <div class="section-intro section-intro--center" style="text-align:center;">
+      <h2 class="section-h" style="max-width:24ch; margin-left:auto; margin-right:auto;">Ready to make provider readiness simpler?</h2>
+      <p class="section-sub" style="max-width:54ch; margin-left:auto; margin-right:auto;">Whether you&rsquo;re looking for better tools, expert support or a different way to manage credentialing, we&rsquo;d like to understand what you need.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a class="btn btn--primary" href="#">See how Metolius works</a>
+        <a class="btn btn--ghost btn--on-dark" href="#">Talk to our team</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+<script src="../shared/shell.js"></script>
+</body>
+</html>
