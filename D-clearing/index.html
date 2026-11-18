@@ -290,9 +290,10 @@
     .terrain-frame {
       position: relative;
       display: grid;
-      grid-template-columns: 64px 1fr;
-      grid-template-rows: 20px auto;
-      gap: 8px 10px;
+      /* axis-label | axis-ticks | grid */
+      grid-template-columns: 14px 54px 1fr;
+      grid-template-rows: 14px 18px auto;
+      gap: 6px 8px;
       padding: 18px 20px 20px;
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
       border: 1px solid rgba(255,255,255,0.1);
@@ -301,66 +302,67 @@
       -webkit-backdrop-filter: blur(6px);
     }
     .terrain-xlabel, .terrain-ylabel {
-      font-size: 10px;
-      letter-spacing: 0.14em;
+      font-size: 9px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.28);
       font-weight: 600;
     }
-    .terrain-xlabel { grid-column: 2; grid-row: 1; align-self: end; }
+    /* X label sits in its OWN row above the ticks — no collision */
+    .terrain-xlabel { grid-column: 3; grid-row: 1; align-self: center; }
+    /* Y label sits in its OWN column left of the ticks — no collision */
     .terrain-ylabel {
-      grid-column: 1; grid-row: 2;
+      grid-column: 1; grid-row: 3;
       writing-mode: vertical-rl;
       transform: rotate(180deg);
-      place-self: center start;
-      padding-top: 4px;
+      place-self: center center;
     }
     .terrain-xaxis {
-      grid-column: 2; grid-row: 1;
+      grid-column: 3; grid-row: 2;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 6px;
       font-size: 10px;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.04em;
-      padding-left: 0; padding-right: 0;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
       align-self: end;
     }
     .terrain-xaxis span { text-align: center; }
     .terrain-yaxis {
-      grid-column: 1; grid-row: 2;
+      grid-column: 2; grid-row: 3;
       display: grid;
       grid-template-rows: repeat(6, 1fr);
       gap: 6px;
       font-size: 10px;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.02em;
       text-align: right;
       align-items: center;
-      padding-right: 4px;
+      padding-right: 2px;
     }
     .terrain {
-      grid-column: 2; grid-row: 2;
+      grid-column: 3; grid-row: 3;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       grid-auto-rows: 1fr;
       gap: 6px;
     }
-    /* Hotspot ring + label: positioned absolutely over the grid, draws eye to blocked cluster */
+    /* Hotspot ring + label: positioned absolutely over the grid, draws eye to Humana×Surgery blocked cluster.
+       Grid is 6×6 inside .terrain. The blocked cells are row 5-6 × col 4 (Humana) — the bottom-right-ish zone. */
     .terrain-hotspot {
       position: absolute;
-      /* Covers columns 4–5 (Humana), rows 5–6 (Derm/Surgery) — approximate percentages */
+      /* targets bottom rows of Humana (col 4) + Cigna (col 5) — bottom area of grid */
       right: 18%;
-      bottom: 22%;
-      width: 110px;
-      height: 72px;
+      bottom: 10%;
+      width: 95px;
+      height: 56px;
       pointer-events: none;
     }
     .terrain-hotspot__ring {
       position: absolute; inset: 0;
-      border: 1px dashed rgba(255, 180, 85, 0.6);
+      border: 1px dashed rgba(255, 180, 85, 0.65);
       border-radius: 10px;
-      box-shadow: inset 0 0 20px rgba(255, 180, 85, 0.14);
+      box-shadow: inset 0 0 18px rgba(255, 180, 85, 0.1);
     }
     @media (prefers-reduced-motion: no-preference) {
       .terrain-hotspot__ring {
@@ -373,16 +375,17 @@
     }
     .terrain-hotspot__label {
       position: absolute;
-      right: 100%;
-      bottom: 100%;
-      transform: translate(8px, 8px);
+      /* Hang the label ABOVE the ring, pointing down at it — no overlap with y-axis or ring */
+      left: 50%;
+      top: -22px;
+      transform: translateX(-50%);
       white-space: nowrap;
-      font-size: 10px;
-      letter-spacing: 0.06em;
+      font-size: 9.5px;
+      letter-spacing: 0.04em;
       color: #FFC97A;
-      background: rgba(255, 180, 85, 0.12);
-      border: 1px solid rgba(255, 180, 85, 0.35);
-      padding: 4px 8px;
+      background: rgba(255, 180, 85, 0.14);
+      border: 1px solid rgba(255, 180, 85, 0.4);
+      padding: 3px 7px;
       border-radius: 4px;
       font-weight: 600;
     }
