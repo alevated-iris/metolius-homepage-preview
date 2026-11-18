@@ -286,16 +286,105 @@
       100% { box-shadow: 0 0 0 0 rgba(160, 228, 188, 0); }
     }
 
-    .terrain {
+    /* Frame holds the grid plus the row/col axis labels and the hotspot annotation */
+    .terrain-frame {
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 8px;
-      padding: 22px;
+      grid-template-columns: 64px 1fr;
+      grid-template-rows: 20px auto;
+      gap: 8px 10px;
+      padding: 18px 20px 20px;
       background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius-lg);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
+    }
+    .terrain-xlabel, .terrain-ylabel {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      font-weight: 600;
+    }
+    .terrain-xlabel { grid-column: 2; grid-row: 1; align-self: end; }
+    .terrain-ylabel {
+      grid-column: 1; grid-row: 2;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      place-self: center start;
+      padding-top: 4px;
+    }
+    .terrain-xaxis {
+      grid-column: 2; grid-row: 1;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      padding-left: 0; padding-right: 0;
+      align-self: end;
+    }
+    .terrain-xaxis span { text-align: center; }
+    .terrain-yaxis {
+      grid-column: 1; grid-row: 2;
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 6px;
+      font-size: 10px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.04em;
+      text-align: right;
+      align-items: center;
+      padding-right: 4px;
+    }
+    .terrain {
+      grid-column: 2; grid-row: 2;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 1fr;
+      gap: 6px;
+    }
+    /* Hotspot ring + label: positioned absolutely over the grid, draws eye to blocked cluster */
+    .terrain-hotspot {
+      position: absolute;
+      /* Covers columns 4–5 (Humana), rows 5–6 (Derm/Surgery) — approximate percentages */
+      right: 18%;
+      bottom: 22%;
+      width: 110px;
+      height: 72px;
+      pointer-events: none;
+    }
+    .terrain-hotspot__ring {
+      position: absolute; inset: 0;
+      border: 1px dashed rgba(255, 180, 85, 0.6);
+      border-radius: 10px;
+      box-shadow: inset 0 0 20px rgba(255, 180, 85, 0.14);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .terrain-hotspot__ring {
+        animation: hotspot-breathe 3200ms ease-in-out infinite;
+      }
+    }
+    @keyframes hotspot-breathe {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 1; }
+    }
+    .terrain-hotspot__label {
+      position: absolute;
+      right: 100%;
+      bottom: 100%;
+      transform: translate(8px, 8px);
+      white-space: nowrap;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: #FFC97A;
+      background: rgba(255, 180, 85, 0.12);
+      border: 1px solid rgba(255, 180, 85, 0.35);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
     }
 
     .glyph {
@@ -1354,14 +1443,30 @@
       </div>
 
       <div class="hero-D__right">
-        <!-- Readiness terrain — glyphs rising from mist -->
+        <!-- Readiness terrain — providers × payers, colored by state -->
         <div class="hero-D__terrain" role="region" aria-label="Provider readiness terrain, live sample">
           <div class="terrain-header">
             <span><span class="live-dot"></span>Sample enterprise · 128 providers</span>
             <span id="terrain-clock">Updated 00:00:01 ago</span>
           </div>
-          <div class="terrain" id="terrain-grid" aria-hidden="true">
-            <!-- Populated by JS -->
+          <!-- Grid frame: column axis = payers, row axis = specialties -->
+          <div class="terrain-frame" aria-hidden="true">
+            <div class="terrain-xlabel">Payers</div>
+            <div class="terrain-xaxis">
+              <span>Aetna</span><span>BCBS</span><span>UHC</span><span>Humana</span><span>Cigna</span><span>Medicare</span>
+            </div>
+            <div class="terrain-ylabel">Specialty</div>
+            <div class="terrain-yaxis">
+              <span>Cardio</span><span>IM</span><span>OB/GYN</span><span>Peds</span><span>Derm</span><span>Surgery</span>
+            </div>
+            <div class="terrain" id="terrain-grid">
+              <!-- Populated by JS -->
+            </div>
+            <!-- Hotspot annotation — draws the eye to the blocked cluster -->
+            <div class="terrain-hotspot" aria-hidden="true">
+              <div class="terrain-hotspot__ring"></div>
+              <div class="terrain-hotspot__label">Humana · Surgery &mdash; 6 blocked, 14 day avg</div>
+            </div>
           </div>
           <div class="terrain-legend" aria-label="Legend">
             <span><i style="background: #6FE3A6; box-shadow: 0 0 8px rgba(111,227,166,0.5);"></i>Ready</span>
@@ -1745,24 +1850,36 @@
     (function terrainInit() {
       const grid = document.getElementById('terrain-grid');
       if (!grid) return;
-      const N = 72; // 6 rows x 12 cols
-      const states = [];
-      // Biased distribution: ~60% ready, ~30% flight, ~10% blocked
-      for (let i = 0; i < N; i++) {
-        const r = Math.random();
-        if (r < 0.6) states.push('ready');
-        else if (r < 0.9) states.push('flight');
-        else states.push('blocked');
-      }
+      // Grid semantics: 6 rows (specialties) × 6 cols (payers) = 36 cells
+      // Columns: 0=Aetna, 1=BCBS, 2=UHC, 3=Humana, 4=Cigna, 5=Medicare
+      // Rows:    0=Cardio, 1=IM, 2=OB/GYN, 3=Peds, 4=Derm, 5=Surgery
+      // Pre-seeded truth: Humana-Surgery hotspot (bottom-right) has 6 blocked cells,
+      // Cigna/Medicare carry extra in-flight load, rest mostly Ready.
+      const ROWS = 6, COLS = 6, N = ROWS * COLS;
+      // state matrix [row][col]
+      const M = [
+        /* Cardio   */ ['ready',  'ready',  'ready',  'flight', 'ready',  'ready' ],
+        /* IM       */ ['ready',  'ready',  'flight', 'flight', 'ready',  'ready' ],
+        /* OB/GYN   */ ['ready',  'flight', 'ready',  'flight', 'flight', 'ready' ],
+        /* Peds     */ ['ready',  'ready',  'ready',  'ready',  'flight', 'ready' ],
+        /* Derm     */ ['ready',  'ready',  'flight', 'blocked','flight', 'ready' ],
+        /* Surgery  */ ['ready',  'flight', 'flight', 'blocked','blocked','ready' ],
+      ];
+      // Stagger animation by diagonal distance so terrain "rises" from top-left
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      states.forEach((s, i) => {
-        const g = document.createElement('div');
-        g.className = `glyph glyph--${s}`;
-        if (!reducedMotion) {
-          g.style.animationDelay = (1800 + i * 22) + 'ms';
+      let i = 0;
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          const s = M[r][c];
+          const g = document.createElement('div');
+          g.className = `glyph glyph--${s}`;
+          if (!reducedMotion) {
+            g.style.animationDelay = (1600 + (r + c) * 65) + 'ms';
+          }
+          grid.appendChild(g);
+          i++;
         }
-        grid.appendChild(g);
-      });
+      }
     })();
 
     /* =========================================================
