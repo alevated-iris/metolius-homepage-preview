@@ -315,33 +315,48 @@
     @keyframes glyph-rise {
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+    /* Fill dot (inner) — now carries real color weight so each state is legible */
     .glyph::after {
       content: '';
       position: absolute;
-      inset: 2px;
+      inset: 3px;
       border-radius: 50%;
       background: currentColor;
-      opacity: 0.22;
+      opacity: 0.85;
     }
+    /* Halo ring (outer) — breathes/spins */
     .glyph::before {
       content: '';
       position: absolute;
       inset: -3px;
       border-radius: 50%;
       border: 1.5px solid currentColor;
-      opacity: 0.72;
+      opacity: 0.55;
     }
-    .glyph--ready    { color: var(--mint); }
+    /* READY — mint green, soft breathing ring */
+    .glyph--ready    { color: #6FE3A6; }
+    .glyph--ready::after  { opacity: 0.78; box-shadow: 0 0 10px rgba(111, 227, 166, 0.45); }
     .glyph--ready::before {
       animation: ring-breathe 3400ms ease-in-out infinite;
     }
-    .glyph--flight   { color: var(--aqua); }
+    /* IN FLIGHT — aqua, faster breathing */
+    .glyph--flight   { color: #4CC6E6; }
+    .glyph--flight::after  { opacity: 0.85; box-shadow: 0 0 12px rgba(76, 198, 230, 0.55); }
     .glyph--flight::before {
       animation: ring-breathe 2600ms ease-in-out infinite;
     }
-    .glyph--blocked  { color: var(--warm-sun); }
+    /* BLOCKED — bright warm amber, dashed slow-spin ring, inner is empty with visible outline */
+    .glyph--blocked  { color: #FFB455; }
+    .glyph--blocked::after {
+      background: transparent;
+      border: 1.5px solid currentColor;
+      opacity: 0.9;
+      box-shadow: 0 0 14px rgba(255, 180, 85, 0.5);
+      inset: 2px;
+    }
     .glyph--blocked::before {
       border-style: dashed;
+      opacity: 0.85;
       animation: ring-slow-spin 8s linear infinite;
     }
     @keyframes ring-breathe {
@@ -1349,9 +1364,9 @@
             <!-- Populated by JS -->
           </div>
           <div class="terrain-legend" aria-label="Legend">
-            <span><i style="background: var(--mint);"></i>Ready</span>
-            <span><i style="background: var(--aqua);"></i>In flight</span>
-            <span><i style="background: var(--warm-sun);"></i>Blocked</span>
+            <span><i style="background: #6FE3A6; box-shadow: 0 0 8px rgba(111,227,166,0.5);"></i>Ready</span>
+            <span><i style="background: #4CC6E6; box-shadow: 0 0 8px rgba(76,198,230,0.5);"></i>In flight</span>
+            <span><i style="background: transparent; border: 1.5px solid #FFB455; box-shadow: 0 0 8px rgba(255,180,85,0.55);"></i>Blocked</span>
           </div>
         </div>
       </div>
