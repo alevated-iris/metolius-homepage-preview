@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Metolius — Direction D: The Clearing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@1,144,300..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="../shared/base.css">
+  <style>
+    /* ============================================================
+       Direction D — The Clearing
+       Enterprise motion. Cinematic register throughout.
+       Thesis: credentialing chaos is weather. Metolius is the clearing.
+       ============================================================ */
+
+    body {
+      background: #040F22;
+    }
+
+    /* Override nav for dark mode — direction D lives in the clearing */
+    .nav {
+      background: rgba(4, 15, 34, 0.72) !important;
+      backdrop-filter: saturate(140%) blur(18px);
+      -webkit-backdrop-filter: saturate(140%) blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    }
+    .nav a, .nav__links a { color: rgba(255,255,255,0.78) !important; }
+    .nav a:hover, .nav__links a:hover { color: #FFFFFF !important; }
+    .nav__logo span { color: #FFFFFF !important; }
+    .nav .btn--primary {
+      background: #FFFFFF !important; color: var(--navy) !important;
+      border: 0;
+    }
+    .nav .btn--primary:hover { background: var(--aqua) !important; color: var(--navy) !important; }
+    .nav .btn--ghost {
+      color: rgba(255,255,255,0.86) !important;
+      border-color: rgba(255,255,255,0.18) !important;
+      background: transparent !important;
+    }
+    .nav .btn--ghost:hover {
+      color: #FFFFFF !important; border-color: rgba(255,255,255,0.4) !important;
+    }
+
+    /* Footer dark override (base.css already dark, keep consistent) */
+    .footer { background: #040F22 !important; }
+
+    /* Direction badge — keep readable on dark */
+    .direction-badge {
+      background: rgba(255,255,255,0.08) !important;
+      border: 1px solid rgba(255,255,255,0.16) !important;
+      color: #FFFFFF !important;
+    }
+
+    /* ============================================================
+       HERO — The Clearing
+       ============================================================ */
+    .hero-D {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #040F22;
+      color: #FFFFFF;
+      padding-top: 120px;
+      padding-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Aurora canvas — fills hero, behind everything */
+    #aurora-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.95;
+    }
+
+    /* Fallback static aurora via CSS for no-JS / headless environments
+       (sits behind the canvas; canvas, when it renders, overlays and intensifies). */
+    .hero-D__aurora-static {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 50% 44% at 22% 22%, rgba(0, 174, 230, 0.72), transparent 65%),
+        radial-gradient(ellipse 52% 48% at 72% 18%, rgba(69, 233, 254, 0.58), transparent 65%),
+        radial-gradient(ellipse 48% 44% at 48% 40%, rgba(160, 228, 188, 0.4), transparent 65%),
+        radial-gradient(ellipse 60% 50% at 18% 62%, rgba(1, 100, 203, 0.55), transparent 65%),
+        radial-gradient(ellipse 40% 36% at 82% 58%, rgba(252, 229, 176, 0.28), transparent 65%),
+        linear-gradient(180deg, #040F22 0%, #061a35 60%, #040F22 100%);
+    }
+
+    /* Mountain ridge — SVG, parallax 3-layer */
+    .hero-D__ridge {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      pointer-events: none;
+      height: 48%;
+      display: block;
+    }
+    .hero-D__ridge svg { display: block; width: 100%; height: 100%; }
+    .ridge-layer-back  { opacity: 0.35; transform: translateY(0); }
+    .ridge-layer-mid   { opacity: 0.55; transform: translateY(0); }
+    .ridge-layer-front { opacity: 0.85; transform: translateY(0); }
+
+    /* Dark haze fade bottom → top across hero so content stays legible */
+    .hero-D__veil {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 35%, rgba(4,15,34,0) 0%, rgba(4,15,34,0.55) 80%),
+        linear-gradient(180deg, rgba(4,15,34,0.6) 0%, rgba(4,15,34,0) 30%, rgba(4,15,34,0) 70%, rgba(4,15,34,0.85) 100%);
+    }
+
+    /* Hero content column */
+    .hero-D__content {
+      position: relative;
+      z-index: 10;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 1100px) {
+      .hero-D__content { grid-template-columns: 1fr; }
+    }
+    .hero-D__left { min-width: 0; }
+    .hero-D__right { min-width: 0; position: relative; padding-top: 30px; }
+
+    .hero-D__eyebrow {
+      font-size: var(--t-eyebrow);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-D__eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--aqua);
+      display: inline-block;
+    }
+
+    .hero-D__headline {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: clamp(40px, 4.8vw, 74px);
+      line-height: 1.0;
+      letter-spacing: -0.028em;
+      color: #FFFFFF;
+      max-width: 13ch;
+      margin: 24px 0 0;
+    }
+    .hero-D__headline .word {
+      display: inline-block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-D__headline .word {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: word-reveal 900ms cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+      }
+      .hero-D__headline .word.delay-0 { animation-delay: 160ms; }
+      .hero-D__headline .word.delay-1 { animation-delay: 300ms; }
+      .hero-D__headline .word.delay-2 { animation-delay: 420ms; }
+      .hero-D__headline .word.delay-3 { animation-delay: 540ms; }
+      .hero-D__headline .word.delay-4 { animation-delay: 660ms; }
+      .hero-D__headline .word.delay-5 { animation-delay: 780ms; }
+      .hero-D__headline .word.delay-6 { animation-delay: 900ms; }
+    }
+    .hero-D__headline em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-variation-settings: "opsz" 144;
+      color: var(--aqua);
+    }
+
+    @keyframes word-reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-D__sub {
+      font-size: 19px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      max-width: 46ch;
+      margin-top: 24px;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-D__sub {
+        opacity: 0;
+        animation: fade-up 1200ms cubic-bezier(0.2, 0.75, 0.2, 1) 1100ms forwards;
+      }
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-D__ctas {
+      display: flex;
+      flex-direction: row;
+      gap: 14px;
+      margin-top: 36px;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    .hero-D__ctas .btn { white-space: nowrap; }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-D__ctas {
+        opacity: 0;
+        animation: fade-up 1200ms cubic-bezier(0.2, 0.75, 0.2, 1) 1300ms forwards;
+      }
+    }
+    .hero-D__ctas .btn--primary {
+      background: #FFFFFF; color: var(--navy);
+      padding: 12px 20px;
+      font-size: 15px;
+    }
+    .hero-D__ctas .btn--primary:hover { background: var(--aqua); color: var(--navy); }
+    .hero-D__ctas .btn--ghost {
+      color: rgba(255,255,255,0.92) !important;
+      border: 1px solid rgba(255,255,255,0.28) !important;
+      padding: 12px 20px;
+      background: transparent !important;
+      font-size: 15px;
+    }
+    .hero-D__ctas .btn--ghost:hover {
+      border-color: #FFFFFF;
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* ----- Readiness terrain — lives inside hero right column ----- */
+    .hero-D__terrain {
+      position: relative;
+      z-index: 10;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-D__terrain {
+        opacity: 0;
+        animation: fade-up 1400ms cubic-bezier(0.2, 0.75, 0.2, 1) 1600ms forwards;
+      }
+    }
+    .terrain-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,0.72);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .terrain-header .live-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 0 rgba(160, 228, 188, 0.7);
+      animation: live-pulse 2200ms ease-out infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes live-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(160, 228, 188, 0.7); }
+      70%  { box-shadow: 0 0 0 12px rgba(160, 228, 188, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(160, 228, 188, 0); }
+    }
+
+    .terrain {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .glyph {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      position: relative;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .glyph {
+        opacity: 0;
+        transform: translateY(8px) scale(0.6);
+        animation: glyph-rise 800ms cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+      }
+    }
+    @keyframes glyph-rise {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .glyph::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.22;
+    }
+    .glyph::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      opacity: 0.72;
+    }
+    .glyph--ready    { color: var(--mint); }
+    .glyph--ready::before {
+      animation: ring-breathe 3400ms ease-in-out infinite;
+    }
+    .glyph--flight   { color: var(--aqua); }
+    .glyph--flight::before {
+      animation: ring-breathe 2600ms ease-in-out infinite;
+    }
+    .glyph--blocked  { color: var(--warm-sun); }
+    .glyph--blocked::before {
+      border-style: dashed;
+      animation: ring-slow-spin 8s linear infinite;
+    }
+    @keyframes ring-breathe {
+      0%, 100% { transform: scale(1); opacity: 0.72; }
+      50%      { transform: scale(1.08); opacity: 0.4; }
+    }
+    @keyframes ring-slow-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .terrain-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.64);
+    }
+    .terrain-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .terrain-legend i {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ============================================================
+       SECTION — The Clearing (chaos vs clearing)
+       ============================================================ */
+    .sec-clearing {
+      position: relative;
+      background: linear-gradient(180deg, #040F22 0%, #061a35 100%);
+      color: #FFFFFF;
+      padding: 140px 0 120px;
+      overflow: hidden;
+    }
+    .sec-clearing__bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 15% 10%, rgba(0, 174, 230, 0.12), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 90%, rgba(69, 233, 254, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+    .sec-clearing__inner {
+      position: relative;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .sec-clearing h2 {
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      max-width: 22ch;
+      margin: 0 0 20px;
+      color: #FFFFFF;
+    }
+    .sec-clearing h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--aqua);
+    }
+    .sec-clearing__lede {
+      font-size: 19px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.72);
+      max-width: 60ch;
+      margin: 0 0 56px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .split__panel {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 28px;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+    }
+    .split__panel--chaos {
+      background: linear-gradient(180deg, #0a1b35 0%, #0d0916 100%);
+    }
+    .split__panel--clearing {
+      background: linear-gradient(180deg, #092a4b 0%, #0b3a66 100%);
+    }
+    .split__label {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .split__label--chaos { color: var(--warm-sun); }
+    .split__label--clearing { color: var(--mint); }
+    .split__label::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      display: inline-block;
+    }
+    .split__title {
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 4px;
+    }
+    .split__meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 20px;
+    }
+
+    /* Chaos content */
+    .chaos-grid {
+      position: relative;
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      align-content: start;
+    }
+    .chaos-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 12px 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.68);
+      position: relative;
+    }
+    .chaos-card .chaos-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .chaos-card .chaos-name {
+      color: #FFFFFF;
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .chaos-card .chaos-status {
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: rgba(217, 123, 42, 0.16);
+      color: var(--warm-sun);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .chaos-card .chaos-status.conflict {
+      background: rgba(255, 89, 94, 0.18);
+      color: #FF9A9E;
+    }
+    .chaos-card .chaos-status.unknown {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.6);
+    }
+    .chaos-card .chaos-meta {
+      color: rgba(255,255,255,0.4);
+      font-size: 10px;
+    }
+    .chaos-overlay {
+      position: absolute;
+      top: 14%; left: 10%;
+      color: var(--warm-sun);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 15px;
+      background: rgba(4,15,34,0.8);
+      padding: 6px 12px;
+      border-radius: 4px;
+      transform: rotate(-4deg);
+      border-left: 2px solid var(--warm-sun);
+      pointer-events: none;
+    }
+    .chaos-overlay.b {
+      top: 58%; left: 44%;
+      transform: rotate(2deg);
+    }
+    .chaos-overlay.c {
+      top: 78%; left: 8%;
+      transform: rotate(-1deg);
+    }
+
+    /* Clearing content */
+    .clearing-table {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .clearing-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 10px 14px;
+      align-items: center;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .clearing-row.head {
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding-bottom: 6px;
+    }
+    .clearing-row .pname { color: #FFFFFF; font-weight: 600; }
+    .clearing-row .pspec { color: rgba(255,255,255,0.6); }
+    .clearing-row .pill-D {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; gap: 6px;
+      width: fit-content;
+    }
+    .pill-D::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .pill-D.ready    { background: rgba(160, 228, 188, 0.14); color: var(--mint); }
+    .pill-D.flight   { background: rgba(69, 233, 254, 0.14);  color: var(--aqua); }
+    .pill-D.blocked  { background: rgba(252, 229, 176, 0.14); color: var(--warm-sun); }
+    .clearing-row .meta-D {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .split__caption {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      color: rgba(255,255,255,0.52);
+    }
+    .split__caption strong { color: #FFFFFF; font-weight: 600; }
+
+    /* ============================================================
+       SECTION — Provider cards horizontal depth marquee
+       ============================================================ */
+    .sec-live {
+      background: #040F22;
+      color: #FFFFFF;
+      padding: 120px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .sec-live__header {
+      max-width: var(--container);
+      margin: 0 auto 60px;
+      padding: 0 var(--gutter);
+    }
+    .sec-live h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      max-width: 20ch;
+      margin: 0;
+      color: #FFFFFF;
+    }
+    .sec-live h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--aqua);
+    }
+    .sec-live__lede {
+      margin-top: 16px;
+      font-size: 18px;
+      color: rgba(255,255,255,0.72);
+      max-width: 56ch;
+    }
+
+    .marquee {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 20px 0 60px;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee__track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee-scroll 48s linear infinite;
+    }
+    .marquee--back .marquee__track {
+      animation-duration: 72s;
+      opacity: 0.4;
+    }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee:hover .marquee__track { animation-play-state: paused; }
+
+    .pcard {
+      flex-shrink: 0;
+      width: 300px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 18px;
+      color: #FFFFFF;
+    }
+    .pcard__top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .pcard__avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--aqua), var(--blue));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .pcard__id { flex: 1; }
+    .pcard__name { font-weight: 600; font-size: 14px; }
+    .pcard__spec { font-size: 12px; color: rgba(255,255,255,0.56); }
+    .pcard__state {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .pcard__state-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .pcard__state--ready .pcard__state-dot { background: var(--mint); box-shadow: 0 0 10px rgba(160,228,188,0.6); }
+    .pcard__state--flight .pcard__state-dot { background: var(--aqua); box-shadow: 0 0 10px rgba(69,233,254,0.6); }
+    .pcard__state--blocked .pcard__state-dot { background: var(--warm-sun); box-shadow: 0 0 10px rgba(252,229,176,0.6); }
+    .pcard__state-label { color: rgba(255,255,255,0.86); font-weight: 600; }
+    .pcard__clock {
+      font-variant-numeric: tabular-nums;
+      color: rgba(255,255,255,0.62);
+      margin-left: auto;
+      font-size: 11px;
+    }
+    .pcard__payers {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 11px;
+    }
+    .pcard__payer {
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      color: rgba(255,255,255,0.72);
+    }
+    .pcard__payer.live {
+      background: rgba(160,228,188,0.12);
+      color: var(--mint);
+    }
+    .pcard__meter {
+      margin-top: 14px;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .pcard__meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--aqua), var(--mint));
+      border-radius: 2px;
+    }
+
+    /* ============================================================
+       SECTION — The Email That Never Came
+       ============================================================ */
+    .sec-email {
+      background: linear-gradient(180deg, #040F22 0%, #060714 100%);
+      padding: 140px 0;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .sec-email__bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(1, 100, 203, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .sec-email__inner {
+      position: relative;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .sec-email__text h2 {
+      font-size: clamp(32px, 3.6vw, 48px);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 0 0 20px;
+      max-width: 15ch;
+    }
+    .sec-email__text h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--warm-sun);
+    }
+    .sec-email__text p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.72);
+      margin: 0 0 14px;
+      max-width: 42ch;
+    }
+    .sec-email__text .eyebrow-D {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--warm-sun);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .sec-email__text .eyebrow-D::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--warm-sun);
+      display: inline-block;
+    }
+    .sec-email__text .link-D {
+      color: var(--aqua);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      text-decoration: none;
+    }
+    .sec-email__text .link-D:hover { color: #FFFFFF; }
+
+    /* The monitor — the never-sent email staged */
+    .monitor {
+      position: relative;
+      aspect-ratio: 16 / 11;
+      background: linear-gradient(145deg, #0a0812 0%, #050210 100%);
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 60px rgba(1, 100, 203, 0.14),
+        0 24px 60px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+    .monitor::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          transparent 0px,
+          transparent 2px,
+          rgba(255,255,255,0.015) 2px,
+          rgba(255,255,255,0.015) 3px
+        );
+      pointer-events: none;
+    }
+    .monitor::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 35%, rgba(255, 227, 160, 0.06), transparent 70%);
+      pointer-events: none;
+    }
+    .monitor-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+    .monitor-header .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .monitor-header .dot.r { background: #ff5f57; }
+    .monitor-header .dot.y { background: #febc2e; }
+    .monitor-header .dot.g { background: #28c840; }
+    .monitor-header .path {
+      margin-left: 12px;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    .email-head {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 4px;
+    }
+    .email-head strong { color: #FFFFFF; font-weight: 600; }
+    .email-sub {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--warm-sun);
+      margin: 14px 0 20px;
+      letter-spacing: -0.01em;
+    }
+    .email-body {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .email-body p { margin: 0 0 10px; }
+
+    .never-came-stamp {
+      position: absolute;
+      top: 24px;
+      right: -14px;
+      transform: rotate(8deg);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: var(--warm-sun);
+      background: rgba(5,5,10,0.9);
+      border: 2px solid var(--warm-sun);
+      padding: 6px 18px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* ============================================================
+       SECTION — Numbers cascade
+       ============================================================ */
+    .sec-numbers {
+      background: linear-gradient(180deg, #060714 0%, #040F22 60%, #052446 100%);
+      padding: 140px 0 120px;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .sec-numbers__inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .sec-numbers__eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 16px;
+    }
+    .sec-numbers h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.08;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+      max-width: 20ch;
+      color: #FFFFFF;
+    }
+    .sec-numbers h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--aqua);
+    }
+    .sec-numbers__lede {
+      font-size: 18px;
+      color: rgba(255,255,255,0.68);
+      max-width: 56ch;
+      margin: 0 0 64px;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .num {
+      padding: 32px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .num__value {
+      font-size: clamp(42px, 4.8vw, 72px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      font-variant-numeric: tabular-nums;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+    .num__unit {
+      font-size: 0.4em;
+      font-weight: 500;
+      color: var(--aqua);
+    }
+    .num__label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.62);
+      margin-top: 14px;
+      line-height: 1.4;
+    }
+    .num::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 0;
+      width: 44px; height: 1px;
+      background: var(--aqua);
+    }
+
+    /* ============================================================
+       SECTION — Pull quote
+       ============================================================ */
+    .sec-quote {
+      background: #052446;
+      padding: 120px 0;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+    }
+    .sec-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 40% at 30% 50%, rgba(69, 233, 254, 0.1), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 70% 50%, rgba(252, 229, 176, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .sec-quote__inner {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      text-align: center;
+    }
+    .sec-quote blockquote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(28px, 3.6vw, 44px);
+      line-height: 1.24;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+      margin: 0;
+      max-width: 24ch;
+      margin-inline: auto;
+    }
+    .sec-quote blockquote::before {
+      content: '“';
+      display: block;
+      font-size: 72px;
+      color: var(--aqua);
+      line-height: 0.5;
+      margin-bottom: 14px;
+      font-family: 'Fraunces', serif;
+      font-style: normal;
+    }
+    .sec-quote .attribution {
+      margin-top: 36px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-style: normal;
+      font-size: 14px;
+      color: rgba(255,255,255,0.56);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .sec-quote .attribution strong { color: #FFFFFF; font-weight: 700; }
+
+    /* ============================================================
+       SECTION — Insights (perspective / advisory voice)
+       ============================================================ */
+    .sec-insights {
+      background: #040F22;
+      padding: 120px 0;
+      color: #FFFFFF;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .sec-insights__inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .sec-insights__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+      gap: 32px;
+    }
+    .sec-insights h2 {
+      font-size: clamp(28px, 3.2vw, 42px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 0;
+      max-width: 18ch;
+    }
+    .sec-insights h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--aqua);
+    }
+    .sec-insights__all {
+      font-size: 14px;
+      color: var(--aqua);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .insight {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 280ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 280ms;
+    }
+    .insight:hover {
+      transform: translateY(-4px);
+      border-color: rgba(69, 233, 254, 0.3);
+    }
+    .insight__thumb {
+      height: 170px;
+      background: linear-gradient(135deg, #0a2246 0%, #0d325f 50%, #052446 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .insight__thumb::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 30%, rgba(69,233,254,0.3), transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(160,228,188,0.2), transparent 50%);
+    }
+    .insight__thumb--b::before {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(252,229,176,0.25), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0,174,230,0.25), transparent 50%);
+    }
+    .insight__thumb--c::before {
+      background:
+        radial-gradient(circle at 50% 50%, rgba(160,228,188,0.25), transparent 50%),
+        radial-gradient(circle at 10% 90%, rgba(1,100,203,0.4), transparent 50%);
+    }
+    .insight__body {
+      padding: 22px 22px 26px;
+    }
+    .insight__kicker {
+      font-size: 12px;
+      color: var(--aqua);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .insight__title {
+      font-size: 18px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 10px;
+    }
+    .insight__excerpt {
+      font-size: 14px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+    }
+
+    /* ============================================================
+       FINAL CTA — The Clearing
+       ============================================================ */
+    .sec-finalcta {
+      background: linear-gradient(180deg, #040F22 0%, #052446 50%, #0d325f 100%);
+      padding: 140px 0 120px;
+      color: #FFFFFF;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .sec-finalcta__sky {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 40% at 50% 10%, rgba(69,233,254,0.18), transparent 60%),
+        radial-gradient(ellipse 60% 30% at 50% 0%, rgba(160,228,188,0.14), transparent 60%);
+      pointer-events: none;
+    }
+    .sec-finalcta__ridge {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 180px;
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .sec-finalcta__inner {
+      position: relative;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .sec-finalcta h2 {
+      font-size: clamp(44px, 6vw, 84px);
+      line-height: 0.98;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      margin: 0 0 24px;
+    }
+    .sec-finalcta h2 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--aqua);
+    }
+    .sec-finalcta p {
+      font-size: 20px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.72);
+      max-width: 48ch;
+      margin: 0 auto 40px;
+    }
+    .sec-finalcta .btn--primary {
+      background: #FFFFFF; color: var(--navy);
+      padding: 16px 32px;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .sec-finalcta .btn--primary:hover { background: var(--aqua); }
+
+    /* ============================================================
+       Responsive fallbacks (wireframe stays desktop 1440)
+       ============================================================ */
+    @media (max-width: 1100px) {
+      .split { grid-template-columns: 1fr; }
+      .sec-email__inner { grid-template-columns: 1fr; }
+      .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+      .insights-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Reduced-motion: tame, don't kill (per web-design-system canonical) */
+    @media (prefers-reduced-motion: reduce) {
+      #aurora-canvas { display: none; }
+      .hero-D__headline .word {
+        opacity: 1; transform: none; animation: none;
+      }
+      .hero-D__sub, .hero-D__ctas, .hero-D__terrain {
+        opacity: 1; animation: none;
+      }
+      .glyph {
+        opacity: 1; transform: none; animation: none;
+      }
+      .glyph--ready::before,
+      .glyph--flight::before,
+      .glyph--blocked::before,
+      .pcard__state-dot {
+        animation: none;
+      }
+      .marquee__track { animation: none; }
+      .terrain-header .live-dot { animation: none; }
+      body { background: #052446; }
+      .hero-D { background: linear-gradient(180deg, #052446 0%, #0a2246 100%); }
+    }
+  </style>
+</head>
+<body data-direction="D" data-direction-name="The Clearing — enterprise motion, category reframe">
+  <div id="nav-mount"></div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero-D" aria-label="Hero">
+    <div class="hero-D__aurora-static" aria-hidden="true"></div>
+    <canvas id="aurora-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-D__ridge" aria-hidden="true">
+      <svg viewBox="0 0 1600 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Back ridge — Three Sisters silhouette, softest -->
+        <path class="ridge-layer-back" fill="#0a1b35" d="M0,500 L0,300
+          C 80,280 140,250 220,240
+          C 300,230 340,280 420,260
+          C 480,245 520,180 580,160
+          L 640,100 L 700,170
+          C 760,210 820,220 900,200
+          C 960,185 1000,145 1060,120
+          L 1120,60 L 1180,150
+          C 1240,180 1300,210 1380,210
+          C 1460,210 1520,250 1600,280 L 1600,500 Z"/>
+        <!-- Mid ridge — denser -->
+        <path class="ridge-layer-mid" fill="#061a35" d="M0,500 L0,370
+          C 100,360 180,340 260,340
+          C 340,340 400,360 480,340
+          C 560,320 620,270 680,255
+          L 740,200 L 800,270
+          C 860,300 920,310 1000,290
+          C 1080,275 1140,240 1200,220
+          L 1260,165 L 1320,240
+          C 1380,270 1440,295 1520,300
+          C 1560,302 1580,310 1600,316 L 1600,500 Z"/>
+        <!-- Front ridge — darkest, most detail -->
+        <path class="ridge-layer-front" fill="#040F22" d="M0,500 L0,420
+          C 120,410 220,400 320,410
+          C 420,420 500,440 580,415
+          C 660,390 720,350 780,335
+          L 840,280 L 900,350
+          C 960,375 1020,385 1100,375
+          C 1180,365 1240,335 1300,315
+          L 1360,265 L 1420,330
+          C 1480,360 1540,370 1600,375 L 1600,500 Z"/>
+      </svg>
+    </div>
+
+    <div class="hero-D__veil" aria-hidden="true"></div>
+
+    <div class="hero-D__content">
+      <div class="hero-D__left">
+        <span class="hero-D__eyebrow">The Clearing · Provider readiness, as terrain</span>
+        <h1 class="hero-D__headline">
+          <span class="word delay-0">You</span>
+          <span class="word delay-1">can't</span>
+          <span class="word delay-2">credential</span>
+          <br>
+          <span class="word delay-3">what</span>
+          <span class="word delay-4">you</span>
+          <span class="word delay-5">can't</span>
+          <span class="word delay-6"><em>see.</em></span>
+        </h1>
+        <p class="hero-D__sub">
+          Credentialing, enrollment, and provider management are the operational weather of healthcare — unpredictable, invisible, costly. Metolius is the clearing where the terrain shows itself: every provider, every payer, every state, one truth.
+        </p>
+        <div class="hero-D__ctas">
+          <a href="#" class="btn btn--primary">Request a provider readiness briefing</a>
+          <a href="#" class="btn btn--ghost">Watch the 90-second overview →</a>
+        </div>
+      </div>
+
+      <div class="hero-D__right">
+        <!-- Readiness terrain — glyphs rising from mist -->
+        <div class="hero-D__terrain" role="region" aria-label="Provider readiness terrain, live sample">
+          <div class="terrain-header">
+            <span><span class="live-dot"></span>Sample enterprise · 128 providers</span>
+            <span id="terrain-clock">Updated 00:00:01 ago</span>
+          </div>
+          <div class="terrain" id="terrain-grid" aria-hidden="true">
+            <!-- Populated by JS -->
+          </div>
+          <div class="terrain-legend" aria-label="Legend">
+            <span><i style="background: var(--mint);"></i>Ready</span>
+            <span><i style="background: var(--aqua);"></i>In flight</span>
+            <span><i style="background: var(--warm-sun);"></i>Blocked</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE CLEARING — chaos vs clearing
+       ============================================================ -->
+  <section class="sec-clearing" id="clearing">
+    <div class="sec-clearing__bg" aria-hidden="true"></div>
+    <div class="sec-clearing__inner">
+      <span class="hero-D__eyebrow" style="margin-bottom: 16px;">The clearing</span>
+      <h2>Two operations, <em>same providers,</em> same Tuesday.</h2>
+      <p class="sec-clearing__lede">
+        On the left: a credentialing team running on email, spreadsheets, and faxed enrollment packets — the shape most organizations still live in. On the right: the same roster, the same day, inside Metolius. Nothing changed about the providers. Everything changed about what's visible.
+      </p>
+
+      <div class="split">
+        <!-- CHAOS panel -->
+        <div class="split__panel split__panel--chaos">
+          <span class="split__label split__label--chaos">The weather</span>
+          <h3 class="split__title">The inbox-and-spreadsheet operation</h3>
+          <p class="split__meta">What a credentialing team sees without a system of record</p>
+          <div class="chaos-grid">
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Patel, R.</span><span class="chaos-status conflict">?</span></div>
+              <div class="chaos-meta">Aetna · docs sent 11/02</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Chen, M.</span><span class="chaos-status">PEND</span></div>
+              <div class="chaos-meta">BCBS · reply pending</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Alvarez, J.</span><span class="chaos-status unknown">—</span></div>
+              <div class="chaos-meta">UHC · unclear</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Haynes, K.</span><span class="chaos-status">PEND</span></div>
+              <div class="chaos-meta">Humana · 44 days</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Devi, P.</span><span class="chaos-status conflict">!</span></div>
+              <div class="chaos-meta">Aetna · payer says no</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Kim, S.</span><span class="chaos-status unknown">—</span></div>
+              <div class="chaos-meta">BCBS · no record</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Brooks, L.</span><span class="chaos-status">PEND</span></div>
+              <div class="chaos-meta">Medicare · forms sent</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Oduya, N.</span><span class="chaos-status unknown">—</span></div>
+              <div class="chaos-meta">UHC · dept. unclear</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Reed, T.</span><span class="chaos-status conflict">!</span></div>
+              <div class="chaos-meta">Cigna · CAQH stale</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Yoon, D.</span><span class="chaos-status">PEND</span></div>
+              <div class="chaos-meta">Aetna · 61 days</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Oster, V.</span><span class="chaos-status unknown">—</span></div>
+              <div class="chaos-meta">BCBS · ?</div>
+            </div>
+            <div class="chaos-card">
+              <div class="chaos-row"><span class="chaos-name">Moller, A.</span><span class="chaos-status">PEND</span></div>
+              <div class="chaos-meta">Humana · 29 days</div>
+            </div>
+          </div>
+          <div class="chaos-overlay">"Did we send that?"</div>
+          <div class="chaos-overlay b">reply "no update"</div>
+          <div class="chaos-overlay c">CAQH expired?</div>
+          <div class="split__caption">
+            <strong>Visibility: fog</strong>
+            <span>Status-known: 14% · Risk-flagged: 0</span>
+          </div>
+        </div>
+
+        <!-- CLEARING panel -->
+        <div class="split__panel split__panel--clearing">
+          <span class="split__label split__label--clearing">The clearing</span>
+          <h3 class="split__title">The Metolius readiness view</h3>
+          <p class="split__meta">Same providers. Same day. Named state, named next step.</p>
+          <div class="clearing-table" role="table">
+            <div class="clearing-row head" role="row">
+              <span>Provider</span><span>Payer</span><span>State</span><span>Next step</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Patel, R.</span> · <span class="pspec">Cardiology</span></span>
+              <span class="meta-D">Aetna</span>
+              <span><span class="pill-D ready">Ready</span></span>
+              <span class="meta-D">Re-cred · 212 days</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Chen, M.</span> · <span class="pspec">IM</span></span>
+              <span class="meta-D">BCBS</span>
+              <span><span class="pill-D flight">In flight</span></span>
+              <span class="meta-D">Payer review · 11 days</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Alvarez, J.</span> · <span class="pspec">OB/GYN</span></span>
+              <span class="meta-D">UHC</span>
+              <span><span class="pill-D flight">In flight</span></span>
+              <span class="meta-D">Signatures · owed to us</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Haynes, K.</span> · <span class="pspec">Peds</span></span>
+              <span class="meta-D">Humana</span>
+              <span><span class="pill-D blocked">Blocked</span></span>
+              <span class="meta-D">NPI update · open ticket</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Devi, P.</span> · <span class="pspec">Surgery</span></span>
+              <span class="meta-D">Aetna</span>
+              <span><span class="pill-D blocked">Blocked</span></span>
+              <span class="meta-D">Payer mismatch · auto-ticket</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Kim, S.</span> · <span class="pspec">Derm</span></span>
+              <span class="meta-D">BCBS</span>
+              <span><span class="pill-D flight">In flight</span></span>
+              <span class="meta-D">Panel assignment · 4 days</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Brooks, L.</span> · <span class="pspec">FM</span></span>
+              <span class="meta-D">Medicare</span>
+              <span><span class="pill-D ready">Ready</span></span>
+              <span class="meta-D">Re-val · 287 days</span>
+            </div>
+            <div class="clearing-row">
+              <span><span class="pname">Oduya, N.</span> · <span class="pspec">Psych</span></span>
+              <span class="meta-D">UHC</span>
+              <span><span class="pill-D flight">In flight</span></span>
+              <span class="meta-D">Verification · 7 days</span>
+            </div>
+          </div>
+          <div class="split__caption">
+            <strong>Visibility: terrain</strong>
+            <span>Status-known: 100% · Risk-flagged: 2 (acted on)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LIVE SYSTEM — marquee of provider cards
+       ============================================================ -->
+  <section class="sec-live">
+    <div class="sec-live__header">
+      <h2>A living operation, not a <em>static report.</em></h2>
+      <p class="sec-live__lede">Every provider in Metolius is a running state machine. Re-credentialing clocks tick. Payer panels open and close. The homepage above is a snapshot of real system behaviour.</p>
+    </div>
+
+    <div class="marquee marquee--back" aria-hidden="true">
+      <div class="marquee__track" id="marquee-back"></div>
+    </div>
+
+    <div class="marquee marquee--front" aria-hidden="true" style="margin-top: -30px;">
+      <div class="marquee__track" id="marquee-front"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EMAIL THAT NEVER CAME
+       ============================================================ -->
+  <section class="sec-email">
+    <div class="sec-email__bg" aria-hidden="true"></div>
+    <div class="sec-email__inner">
+      <div class="sec-email__text">
+        <span class="eyebrow-D">The campaign</span>
+        <h2>The email <em>that never came.</em></h2>
+        <p>Every credentialing-adjacent professional has one — the message a payer, a biller, a leader was supposed to send, that didn't, that cost a week or a month.</p>
+        <p>Metolius is the system that sends the email. The pre-emptive one. Forty-eight hours before the expiration. Sixty days before the recredentialing window. The one that keeps the clinic running because somebody — or something — finally knew what was due.</p>
+        <a href="#" class="link-D">Read the campaign brief →</a>
+      </div>
+
+      <div class="monitor">
+        <div class="monitor-header">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="path">drafts · 11/04/2024 · 14:22 · never_sent.eml</span>
+        </div>
+
+        <div class="email-head">From · <strong>Credentialing, Payer Operations</strong></div>
+        <div class="email-head">To · <strong>Dr. L. Brooks, FM</strong></div>
+        <div class="email-head">Cc · <strong>Practice Administrator</strong></div>
+
+        <div class="email-sub">Your Humana enrollment expires in 11 days — action required</div>
+
+        <div class="email-body">
+          <p>Dr. Brooks,</p>
+          <p>Your Humana enrollment lapses on November 15. We need your CAQH re-attestation and a signed W-9 before the 10th to avoid a gap.</p>
+          <p>Attached: everything you need to sign. It will take four minutes.</p>
+          <p>— Metolius Credentialing Operations</p>
+        </div>
+
+        <div class="never-came-stamp">never sent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       NUMBERS CASCADE
+       ============================================================ -->
+  <section class="sec-numbers">
+    <div class="sec-numbers__inner">
+      <div class="sec-numbers__eyebrow">By the numbers</div>
+      <h2>What <em>clearing</em> looks like, operationally.</h2>
+      <p class="sec-numbers__lede">Across the organisations running on Metolius, the compounding effect of visible readiness shows up here. Each number is live-aggregated; refreshed hourly from production tenants.</p>
+
+      <div class="numbers-grid">
+        <div class="num">
+          <div class="num__value" data-count-to="4200" data-suffix="+"><span>4,200</span><span class="num__unit">+</span></div>
+          <div class="num__label">Providers kept ready in-network across live tenants</div>
+        </div>
+        <div class="num">
+          <div class="num__value"><span>−63</span><span class="num__unit">%</span></div>
+          <div class="num__label">Median time from enrollment submission to payer approval, YoY</div>
+        </div>
+        <div class="num">
+          <div class="num__value"><span>$0</span></div>
+          <div class="num__label">Lapses caused by Metolius-tracked recredentialing in the last 12 months</div>
+        </div>
+        <div class="num">
+          <div class="num__value"><span>25</span><span class="num__unit"> yrs</span></div>
+          <div class="num__label">Combined operational experience behind the methodology — not a product spin-up</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PULL QUOTE
+       ============================================================ -->
+  <section class="sec-quote">
+    <div class="sec-quote__inner">
+      <blockquote>
+        We stopped running credentialing on heroics. The clearing was the point.
+      </blockquote>
+      <div class="attribution">
+        <strong>VP of Provider Operations</strong> &nbsp;·&nbsp; Multi-state MSO · 340 providers
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       INSIGHTS
+       ============================================================ -->
+  <section class="sec-insights">
+    <div class="sec-insights__inner">
+      <div class="sec-insights__head">
+        <h2>From the <em>clearing.</em> Perspective for operators.</h2>
+        <a class="sec-insights__all" href="#">All insights →</a>
+      </div>
+      <div class="insights-grid">
+        <article class="insight">
+          <div class="insight__thumb"></div>
+          <div class="insight__body">
+            <div class="insight__kicker">Operator field notes</div>
+            <h3 class="insight__title">The 48-hour email: why pre-emptive wins the week</h3>
+            <p class="insight__excerpt">A short post on why anticipatory notifications collapse weeks of downstream work — with three real credentialing timelines before/after.</p>
+          </div>
+        </article>
+        <article class="insight">
+          <div class="insight__thumb insight__thumb--b"></div>
+          <div class="insight__body">
+            <div class="insight__kicker">Methodology</div>
+            <h3 class="insight__title">Provider readiness ≠ credentialing software</h3>
+            <p class="insight__excerpt">Why we think the category needs a different name — and the operational stance that follows from it.</p>
+          </div>
+        </article>
+        <article class="insight">
+          <div class="insight__thumb insight__thumb--c"></div>
+          <div class="insight__body">
+            <div class="insight__kicker">Case study · multi-state MSO</div>
+            <h3 class="insight__title">63% faster enrollments across 12 payers — the full playbook</h3>
+            <p class="insight__excerpt">Six-month rollout, five-person team, two states. What was built, what broke, what we'd do again.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="sec-finalcta">
+    <div class="sec-finalcta__sky" aria-hidden="true"></div>
+    <svg class="sec-finalcta__ridge" viewBox="0 0 1600 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#040F22" d="M0,180 L0,110
+        C 120,100 240,85 360,90
+        C 480,95 560,115 680,105
+        C 800,95 900,60 1000,65
+        C 1100,70 1180,115 1300,118
+        C 1420,120 1500,100 1600,105 L 1600,180 Z"/>
+    </svg>
+    <div class="sec-finalcta__inner">
+      <h2>You can see it <em>from here.</em></h2>
+      <p>One briefing. Your providers, your payers, your real roster. We show you the clearing with your own data on it.</p>
+      <a href="#" class="btn btn--primary">Request a provider readiness briefing</a>
+    </div>
+  </section>
+
+  <div id="footer-mount"></div>
+  <script src="../shared/shell.js"></script>
+  <script>
+    /* =========================================================
+       Aurora canvas — cinematic WebGL-style curtains
+       Loop-safe: uses a monotonic global clock
+       Lightweight 2D canvas (no three.js dependency)
+       ========================================================= */
+    (function auroraInit() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const canvas = document.getElementById('aurora-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        w = rect.width; h = rect.height;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // Aurora curtains — 5 drifting blobs, additive blend
+      const curtains = [
+        { hue: 'rgba(0, 174, 230, 0.82)',  rx: 560, ry: 420, cx: 0.22, cy: 0.22, sx: 0.065, sy: 0.038, px: 300, py: 120 },
+        { hue: 'rgba(69, 233, 254, 0.72)', rx: 520, ry: 360, cx: 0.72, cy: 0.18, sx: 0.051, sy: 0.044, px: 260, py: 100 },
+        { hue: 'rgba(160, 228, 188, 0.5)', rx: 460, ry: 380, cx: 0.5, cy: 0.42, sx: 0.072, sy: 0.029, px: 220, py: 140 },
+        { hue: 'rgba(1, 100, 203, 0.68)',  rx: 600, ry: 420, cx: 0.1, cy: 0.62, sx: 0.048, sy: 0.057, px: 280, py: 160 },
+        { hue: 'rgba(252, 229, 176, 0.32)', rx: 320, ry: 280, cx: 0.86, cy: 0.58, sx: 0.08, sy: 0.034, px: 180, py: 110 },
+      ];
+
+      let start = performance.now();
+      function frame(now) {
+        const t = (now - start) / 1000; // global monotonic — loop-safe
+        ctx.clearRect(0, 0, w, h);
+
+        // Deep sky base
+        const bg = ctx.createLinearGradient(0, 0, 0, h);
+        bg.addColorStop(0, 'rgba(4, 15, 34, 0.98)');
+        bg.addColorStop(1, 'rgba(6, 26, 53, 0.92)');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.globalCompositeOperation = 'lighter';
+        for (const c of curtains) {
+          const cx = c.cx * w + Math.sin(t * c.sx) * c.px;
+          const cy = c.cy * h + Math.cos(t * c.sy) * c.py;
+          const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, c.rx);
+          grad.addColorStop(0, c.hue);
+          grad.addColorStop(1, 'rgba(4, 15, 34, 0)');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.ellipse(cx, cy, c.rx, c.ry, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    /* =========================================================
+       Readiness terrain — glyphs, state distribution
+       ========================================================= */
+    (function terrainInit() {
+      const grid = document.getElementById('terrain-grid');
+      if (!grid) return;
+      const N = 72; // 6 rows x 12 cols
+      const states = [];
+      // Biased distribution: ~60% ready, ~30% flight, ~10% blocked
+      for (let i = 0; i < N; i++) {
+        const r = Math.random();
+        if (r < 0.6) states.push('ready');
+        else if (r < 0.9) states.push('flight');
+        else states.push('blocked');
+      }
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      states.forEach((s, i) => {
+        const g = document.createElement('div');
+        g.className = `glyph glyph--${s}`;
+        if (!reducedMotion) {
+          g.style.animationDelay = (1800 + i * 22) + 'ms';
+        }
+        grid.appendChild(g);
+      });
+    })();
+
+    /* =========================================================
+       Provider card marquee — populates both tracks
+       ========================================================= */
+    (function marqueeInit() {
+      const specs = ['Cardiology','IM','OB/GYN','Peds','Derm','FM','Psych','Surgery','Neuro','ENT','Ortho','PM&R'];
+      const names = ['Patel, R.','Chen, M.','Alvarez, J.','Haynes, K.','Devi, P.','Kim, S.','Brooks, L.','Oduya, N.','Reed, T.','Yoon, D.','Moller, A.','Oster, V.','Nakamura, H.','Clark, B.','Singh, I.','Vidal, C.'];
+      const payers = ['Aetna','BCBS','UHC','Humana','Cigna','Medicare'];
+      const stateDist = [
+        { k: 'ready', label: 'Ready', clockFn: (p) => `${p} day re-cred window` },
+        { k: 'flight', label: 'In flight', clockFn: (p) => `${p} day payer review` },
+        { k: 'blocked', label: 'Blocked', clockFn: (p) => `${p} day open ticket` },
+      ];
+
+      function build(n, seedOffset) {
+        const out = document.createDocumentFragment();
+        for (let i = 0; i < n; i++) {
+          const idx = (i + seedOffset) % names.length;
+          const name = names[idx];
+          const spec = specs[(i + seedOffset) % specs.length];
+          const initials = name.split(',')[0][0] + name.split(' ')[1][0];
+          const stateDef = stateDist[(i + seedOffset) % 3];
+          const payer1 = payers[(i + seedOffset) % payers.length];
+          const payer2 = payers[(i + seedOffset + 2) % payers.length];
+          const payer3 = payers[(i + seedOffset + 4) % payers.length];
+          const clockDays = stateDef.k === 'ready' ? 180 + (i * 7) % 220 : stateDef.k === 'flight' ? 3 + i % 18 : 2 + i % 9;
+          const meter = stateDef.k === 'ready' ? 90 + i % 9 : stateDef.k === 'flight' ? 40 + i * 3 % 40 : 20 + i % 20;
+
+          const el = document.createElement('div');
+          el.className = 'pcard';
+          el.innerHTML = `
+            <div class="pcard__top">
+              <div class="pcard__avatar">${initials}</div>
+              <div class="pcard__id">
+                <div class="pcard__name">${name}</div>
+                <div class="pcard__spec">${spec}</div>
+              </div>
+            </div>
+            <div class="pcard__state pcard__state--${stateDef.k}">
+              <span class="pcard__state-dot"></span>
+              <span class="pcard__state-label">${stateDef.label}</span>
+              <span class="pcard__clock">${stateDef.clockFn(clockDays)}</span>
+            </div>
+            <div class="pcard__payers">
+              <span class="pcard__payer live">${payer1}</span>
+              <span class="pcard__payer">${payer2}</span>
+              <span class="pcard__payer">${payer3}</span>
+            </div>
+            <div class="pcard__meter"><div class="pcard__meter-fill" style="width:${meter}%"></div></div>
+          `;
+          out.appendChild(el);
+        }
+        return out;
+      }
+
+      const back = document.getElementById('marquee-back');
+      const front = document.getElementById('marquee-front');
+      if (back) {
+        // Duplicate content for seamless loop
+        back.appendChild(build(14, 2));
+        back.appendChild(build(14, 2));
+      }
+      if (front) {
+        front.appendChild(build(14, 7));
+        front.appendChild(build(14, 7));
+      }
+    })();
+
+    /* =========================================================
+       Terrain header live clock
+       ========================================================= */
+    (function liveClock() {
+      const header = document.getElementById('terrain-clock');
+      if (!header) return;
+      let sec = 0;
+      setInterval(() => {
+        sec = (sec + 1) % 60;
+        const s = sec < 10 ? '0' + sec : sec;
+        header.textContent = `Updated 00:00:${s} ago`;
+      }, 1000);
+    })();
+  </script>
+</body>
+</html>
