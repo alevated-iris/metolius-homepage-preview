@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Metolius — Direction B: Credentialer voice</title>
+  <title>Metolius — Direction B (v2): Credentialer voice, revised</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,9 +16,10 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(ellipse at 90% 10%, rgba(252, 229, 176, 0.5) 0%, rgba(252, 229, 176, 0) 55%),
-        radial-gradient(ellipse at 5% 90%, rgba(160, 228, 188, 0.35) 0%, rgba(160, 228, 188, 0) 55%),
-        #FFFFFF;
+        radial-gradient(ellipse 70% 65% at 92% 8%, rgba(252, 229, 176, 0.75) 0%, rgba(252, 229, 176, 0) 60%),
+        radial-gradient(ellipse 65% 60% at 4% 92%, rgba(160, 228, 188, 0.60) 0%, rgba(160, 228, 188, 0) 60%),
+        radial-gradient(ellipse 50% 55% at 50% 50%, rgba(69, 233, 254, 0.14) 0%, rgba(69, 233, 254, 0) 65%),
+        linear-gradient(180deg, #FBFDFE 0%, #FFFFFF 70%);
       border-bottom: 1px solid var(--line);
     }
     .hero-B__grid {
@@ -368,6 +369,150 @@
   </div>
 </section>
 
+<!-- ============ SECTION 4.5 — Feature pop-outs (NEW, credentialer POV captions) ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-intro" style="max-width:760px; margin-bottom:12px;">
+      <span class="kicker">From someone who&rsquo;s done this work</span>
+      <h2 class="section-h">The moments that make credentialing feel manageable.</h2>
+      <p class="section-sub">
+        Not every feature is a hero screen. Some are the small reliefs that
+        change the shape of the day &mdash; the thing that catches an expiring license
+        before the provider does, the roster that doesn&rsquo;t need re-keying, the
+        exception that comes with context instead of a question mark.
+      </p>
+    </div>
+
+    <div class="popout-field">
+      <!-- 1. The &quot;before it becomes a fire&quot; signal -->
+      <div class="popout" style="grid-column: 1 / span 4;">
+        <span class="popout__label">Before it becomes a fire</span>
+        <h3 class="popout__title">Expirations caught weeks ahead, not days late.</h3>
+        <p class="popout__body">
+          <em>&ldquo;By the time a payer tells you the license expired, you&rsquo;re already
+          three weeks into a revenue hold.&rdquo;</em> Metolius sweeps renewal calendars continuously.
+        </p>
+        <div class="popout__ui">
+          <div class="popout-notif">
+            <div class="popout-notif__icon">!</div>
+            <div class="popout-notif__text">
+              <strong>License renewal &middot; Dr. Patel</strong>
+              <span>Expires in 14 days &middot; WA medical &middot; owner: you</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Roster without the re-key -->
+      <div class="popout" style="grid-column: 5 / span 4;">
+        <span class="popout__label">Rosters without the re-key</span>
+        <h3 class="popout__title">Drop a spreadsheet. Skip the tab-switching.</h3>
+        <p class="popout__body">
+          <em>&ldquo;Everyone says &lsquo;just send me the roster&rsquo; and nobody agrees on the
+          format.&rdquo;</em> Metolius ingests whatever you send and maps it for you.
+        </p>
+        <div class="popout__ui">
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-complete);"></span>
+            <span class="popout-mini-row__name">Q4_cardio_providers.csv</span>
+            <span class="popout-mini-row__meta">24 matched</span>
+          </div>
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-progress);"></span>
+            <span class="popout-mini-row__name">Owner routing</span>
+            <span class="popout-mini-row__meta">auto-assigned</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Exceptions with context -->
+      <div class="popout" style="grid-column: 9 / span 4;">
+        <span class="popout__label">Exceptions with context</span>
+        <h3 class="popout__title">The reason, right next to the problem.</h3>
+        <p class="popout__body">
+          <em>&ldquo;A &lsquo;needs attention&rsquo; flag with no explanation is just another
+          thing on the list.&rdquo;</em> Metolius shows the why, not just the what.
+        </p>
+        <div class="popout__ui">
+          <div class="popout-timeline">
+            <div class="popout-timeline__step popout-timeline__step--done">NPDB verified</div>
+            <div class="popout-timeline__step">State board &middot; address mismatch</div>
+            <div class="popout-timeline__step popout-timeline__step--muted">Suggested fix: confirm with provider</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Answer the question without the report wait -->
+      <div class="popout" style="grid-column: 1 / span 4;">
+        <span class="popout__label">Answer the question at 4pm on Friday</span>
+        <h3 class="popout__title">Status for the whole team. In three clicks.</h3>
+        <p class="popout__body">
+          <em>&ldquo;The CFO asks how it&rsquo;s going and I need an answer before I&rsquo;ve
+          finished my coffee.&rdquo;</em>
+        </p>
+        <div class="popout__ui">
+          <div class="popout-spark">
+            <div class="popout-spark__bar" style="height: 30%;"></div>
+            <div class="popout-spark__bar" style="height: 40%;"></div>
+            <div class="popout-spark__bar" style="height: 55%;"></div>
+            <div class="popout-spark__bar" style="height: 50%;"></div>
+            <div class="popout-spark__bar" style="height: 68%;"></div>
+            <div class="popout-spark__bar" style="height: 82%;"></div>
+            <div class="popout-spark__bar" style="height: 95%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--ink-3);">
+            <span>Ready to work</span>
+            <span style="color:var(--status-complete); font-weight:700;">94% &uarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Verified once, reused everywhere -->
+      <div class="popout" style="grid-column: 5 / span 4;">
+        <span class="popout__label">The MOAT (for credentialers)</span>
+        <h3 class="popout__title">Verified once. Reused everywhere Metolius operates.</h3>
+        <p class="popout__body">
+          <em>&ldquo;I shouldn&rsquo;t be chasing the same transcripts for the same provider
+          at a different hospital a year later.&rdquo;</em> With Metolius, you&rsquo;re not.
+        </p>
+        <div class="popout__ui">
+          <div class="popout-ring">
+            <div class="popout-ring__orbit"></div>
+            <div class="popout-ring__core">M</div>
+            <div class="popout-ring__node popout-ring__node--1">H1</div>
+            <div class="popout-ring__node popout-ring__node--2">St</div>
+            <div class="popout-ring__node popout-ring__node--3">Pr</div>
+            <div class="popout-ring__node popout-ring__node--4">H2</div>
+            <div class="popout-ring__node popout-ring__node--5">Pay</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Audit-ready without the scramble -->
+      <div class="popout" style="grid-column: 9 / span 4;">
+        <span class="popout__label">Audit-ready. Always.</span>
+        <h3 class="popout__title">A record that doesn&rsquo;t need to be reconstructed.</h3>
+        <p class="popout__body">
+          <em>&ldquo;Audit week shouldn&rsquo;t mean reverse-engineering six months of
+          decisions from three different inboxes.&rdquo;</em>
+        </p>
+        <div class="popout__ui">
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--ink-3);"></span>
+            <span class="popout-mini-row__name">Owner reassigned</span>
+            <span class="popout-mini-row__meta">P. Chen &middot; Nov 18</span>
+          </div>
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-complete);"></span>
+            <span class="popout-mini-row__name">Payer approved</span>
+            <span class="popout-mini-row__meta">BCBS &middot; Nov 20</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SECTION 5 — People ============ -->
 <section id="who" class="section section--soft">
   <div class="container">
@@ -402,6 +547,46 @@
       <p class="quote__meta" style="margin-top: 28px;">— A thought Metolius was built around.</p>
     </div>
   </div>
+</section>
+
+<!-- ============ SECTION 6.5 — Confessions of a Credentialer (NEW, editorial teaser) ============ -->
+<section class="section">
+  <div class="container">
+    <div class="confess">
+      <div class="confess__meta">
+        <div class="confess__num">Editorial series &middot; new</div>
+        <div class="confess__kicker">Confessions of a Credentialer</div>
+        <h2 class="confess__h">The job nobody talks about. The one every revenue cycle depends on.</h2>
+        <p>
+          Short, honest pieces written by and for the people who keep provider
+          readiness moving. The workarounds. The payer quirks. The small wins
+          that don&rsquo;t make the KPI deck.
+        </p>
+        <div style="margin-top:24px;"><a class="btn btn--link" style="color:#9FD3FF;" href="#">Read the series &rarr;</a></div>
+      </div>
+      <div class="confess__quote">
+        <blockquote>
+          &ldquo;The spreadsheet I inherited had 211 tabs. By month two I realized it
+          wasn&rsquo;t a spreadsheet problem &mdash; it was a data architecture problem.&rdquo;
+        </blockquote>
+        <cite>&mdash; Vol. 01 &middot; coming soon</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 6.75 — Metolius River brand moment (NEW) ============ -->
+<section class="river-band">
+  <div class="river-band__inner">
+    <span class="river-band__eyebrow">The Metolius principle</span>
+    <h2 class="river-band__h">Steady beats hurried. Every week of the month.</h2>
+    <p class="river-band__sub">
+      The Metolius River is known for one thing: it never floods and it never
+      dries up. That&rsquo;s the operating cadence credentialing deserves &mdash; dependable,
+      visible, and confident about where everything stands.
+    </p>
+  </div>
+  <span class="river-band__placeholder-tag">Approved Metolius River photography &middot; placeholder</span>
 </section>
 
 <!-- ============ SECTION 7 — Implementation ============ -->

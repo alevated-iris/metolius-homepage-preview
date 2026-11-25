@@ -787,6 +787,7 @@ p { margin: 0; }
 .confess__h {
   font-size: 28px; font-weight: 600; letter-spacing: -0.015em;
   line-height: 1.2; margin: 0 0 16px;
+  color: #FFFFFF;
 }
 .confess__meta p {
   color: #AFC1D6; font-size: 14.5px; line-height: 1.5;
