@@ -664,9 +664,11 @@ p { margin: 0; }
 }
 .river-band__scrim {
   position: absolute; inset: 0;
+  /* Left-weighted scrim: guarantee type-contrast even when a real photo lands.
+     Keeps the right half open for the river view. */
   background:
-    linear-gradient(100deg, rgba(5, 20, 36, 0.78) 0%, rgba(5, 20, 36, 0.55) 40%, rgba(5, 20, 36, 0) 75%),
-    linear-gradient(0deg, rgba(5, 20, 36, 0.35) 0%, rgba(5, 20, 36, 0) 55%);
+    linear-gradient(100deg, rgba(5, 20, 36, 0.92) 0%, rgba(5, 20, 36, 0.80) 30%, rgba(5, 20, 36, 0.35) 60%, rgba(5, 20, 36, 0) 82%),
+    linear-gradient(0deg, rgba(5, 20, 36, 0.45) 0%, rgba(5, 20, 36, 0) 55%);
 }
 .river-band::before {
   /* water-surface ripple lines */
