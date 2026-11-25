@@ -1100,12 +1100,19 @@ p { margin: 0; }
   /* Nav: shrink link set, keep CTA */
   .nav__links { gap: 20px; font-size: 14px; }
 
-  /* Hero grids go column at tablet so the product card + copy breathe */
+  /* Hero grids go column at tablet so the product card + copy breathe.
+     !important because each hero's inline <style> block defines these at
+     the same specificity and wins source order; the responsive floor has
+     to beat that cleanly. */
   .hero-A__grid,
   .hero-B__grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
   }
+  /* The perspective transform on hero-A__ui causes 3D width to overflow
+     at narrow widths — kill it on tablet/mobile. */
+  .hero-A__ui { transform: none !important; max-width: 100%; }
+  .hero-A__ui-callout { max-width: calc(100% - 24px) !important; }
   .hero-A__h,
   .hero-B__h {
     font-size: clamp(40px, 6vw, 56px);
@@ -1148,8 +1155,8 @@ p { margin: 0; }
 
   /* Direction B hero inbox-vs: stack mocks */
   .inbox-vs {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
   }
 
   /* River band: reduce min-height, re-center type */
@@ -1207,11 +1214,12 @@ p { margin: 0; }
 
   /* Hero UI table: drop least-critical columns to reduce horizontal crush */
   .ui-row, .ui-row--head {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr) !important;
     font-size: 12px;
-    gap: 8px;
-    padding: 10px 14px;
+    gap: 8px !important;
+    padding: 10px 14px !important;
   }
+  .ui-card { max-width: 100%; overflow-x: hidden; }
   .ui-row > div:nth-child(n+4) { display: none; }
   .ui-row--head > div:nth-child(n+4) { display: none; }
   .ui-provider { gap: 8px; }
@@ -1222,9 +1230,12 @@ p { margin: 0; }
   .hero-B__ui-callout {
     position: static !important;
     display: inline-flex;
-    margin: 6px 6px 0 0;
+    margin: 6px 6px 0 0 !important;
     max-width: none !important;
+    top: auto !important; right: auto !important; bottom: auto !important; left: auto !important;
   }
+  /* belt-and-braces body overflow lock */
+  html, body { overflow-x: hidden; max-width: 100%; }
 
   /* Button row: full-width stacked buttons on mobile */
   .btn-row { flex-direction: column; align-items: stretch; gap: 10px; }
