@@ -1083,3 +1083,182 @@ p { margin: 0; }
   background: var(--accent);
   border-radius: 2px;
 }
+
+/* ============================================================
+ * RESPONSIVE LAYER  (added 2026-11-25 for Nicola v2 review)
+ * Two breakpoints:
+ *   - 960px: tablet  (hero stacks, side-by-side grids collapse to 2-col or 1-col)
+ *   - 640px: mobile  (nav collapses to logo+CTA, all grids stack, fluid type)
+ * The site was built desktop-first with zero media queries; this block
+ * backfills a responsive floor so A + B render cleanly on phone / tablet.
+ * ============================================================ */
+
+/* Tablet reflow */
+@media (max-width: 960px) {
+  .container { padding: 0 24px; }
+
+  /* Nav: shrink link set, keep CTA */
+  .nav__links { gap: 20px; font-size: 14px; }
+
+  /* Hero grids go column at tablet so the product card + copy breathe */
+  .hero-A__grid,
+  .hero-B__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hero-A__h,
+  .hero-B__h {
+    font-size: clamp(40px, 6vw, 56px);
+    max-width: 18ch;
+    line-height: 1.08;
+  }
+
+  /* Side-by-side feature grids collapse to 2-col */
+  .feature-grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .feature-grid    { grid-template-columns: repeat(2, 1fr); }
+
+  /* Pop-out galley: 12-col → 6-col (so 4-wide cards become half-width) */
+  .popout-field {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+  }
+  .popout {
+    grid-column: span 6 !important;
+    grid-row: auto !important;
+  }
+
+  /* Route cards go single column */
+  .route-grid { grid-template-columns: 1fr; }
+
+  /* vs-split + moat stack */
+  .vs-split,
+  .moat {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .moat__arrow { transform: rotate(90deg); justify-self: center; }
+
+  /* Journey (4-step) → 2 × 2 */
+  .journey { grid-template-columns: repeat(2, 1fr); }
+
+  /* Leadership dashboard 4-col → 2-col */
+  .ui-card [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Direction B hero inbox-vs: stack mocks */
+  .inbox-vs {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* River band: reduce min-height, re-center type */
+  .river-band { min-height: 320px; padding: 48px 0; }
+  .river-band__h { font-size: clamp(28px, 4.5vw, 36px); }
+
+  /* Section headlines scale down */
+  .section-h { font-size: clamp(32px, 5vw, 46px); line-height: 1.12; }
+
+  /* Preview-mode direction badge: pin to top-right but don't fight the nav */
+  .direction-badge {
+    top: 8px;
+    right: 12px;
+    padding: 4px 10px;
+    font-size: 10.5px;
+  }
+}
+
+/* Mobile reflow */
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+
+  /* Nav: logo + primary CTA only. Hide the link set. */
+  .nav__links { display: none; }
+  .nav__cta .btn--ghost { display: none; }
+  .nav__cta .btn--primary { padding: 10px 16px; font-size: 14px; }
+  .nav { padding: 14px 0; }
+
+  /* Hide the dev direction-badge on phones so it doesn't crowd the hero */
+  .direction-badge { display: none; }
+
+  /* Headlines */
+  .hero-A__h,
+  .hero-B__h {
+    font-size: clamp(34px, 9vw, 44px);
+    line-height: 1.1;
+    max-width: 16ch;
+  }
+  .section-h { font-size: clamp(26px, 7vw, 36px); line-height: 1.15; }
+
+  /* All feature grids: 1-col */
+  .feature-grid, .feature-grid--4 { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Pop-outs: single column */
+  .popout-field { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Journey: single column */
+  .journey { grid-template-columns: 1fr; }
+
+  /* Leadership dashboard 4-col → 1-col */
+  .ui-card [style*="grid-template-columns: repeat(4, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+  .ui-card [style*="font-size:38px"] { font-size: 30px !important; }
+
+  /* Hero UI table: drop least-critical columns to reduce horizontal crush */
+  .ui-row, .ui-row--head {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    font-size: 12px;
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .ui-row > div:nth-child(n+4) { display: none; }
+  .ui-row--head > div:nth-child(n+4) { display: none; }
+  .ui-provider { gap: 8px; }
+  .ui-avatar { width: 26px; height: 26px; font-size: 11px; }
+
+  /* Hero floating callouts: collapse to inline below hero to stop overlap */
+  .hero-A__ui-callout,
+  .hero-B__ui-callout {
+    position: static !important;
+    display: inline-flex;
+    margin: 6px 6px 0 0;
+    max-width: none !important;
+  }
+
+  /* Button row: full-width stacked buttons on mobile */
+  .btn-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .btn { justify-content: center; }
+
+  /* Padding on mocks inside Direction B hero */
+  .mock__chrome, .inbox-row, .inbox-signature { padding-left: 12px; padding-right: 12px; }
+
+  /* Route card UI blocks: tighter */
+  .route__ui { font-size: 12.5px; padding: 12px; }
+  .route__ui-site { grid-template-columns: 90px 1fr 40px; }
+
+  /* Section vertical rhythm compresses */
+  .section { padding: 56px 0; }
+  .section--tight { padding: 40px 0; }
+
+  /* River band min-height scales back further */
+  .river-band { min-height: 260px; padding: 40px 0; }
+  .river-band__inner { padding: 0 20px; }
+  .river-band__placeholder-tag { bottom: 10px; right: 14px; }
+
+  /* Nav-dark CTA section: keep type sizes reasonable */
+  .section--dark .section-h { font-size: clamp(26px, 7vw, 34px); }
+
+  /* VS split cards: tighten padding */
+  .vs-split__col { padding: 24px; }
+
+  /* MOAT nodes wrap */
+  .moat__nodes { gap: 6px; }
+  .moat__node { font-size: 12px; padding: 6px 10px; }
+
+  /* Confess (B-specific) */
+  .confess { padding: 32px 20px; }
+
+  /* Popout UI chip bits */
+  .popout-ring { transform: scale(0.85); transform-origin: left top; margin-bottom: -40px; }
+}
