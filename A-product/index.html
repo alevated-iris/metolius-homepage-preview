@@ -388,37 +388,57 @@
   </div>
 </section>
 
-<!-- ============ SECTION 5 — Audience routing (keep, trimmed) ============ -->
+<!-- ============ SECTION 5 — Audience routing (live preview of each route) ============ -->
 <section id="solutions" class="section">
   <div class="container">
-    <div class="section-intro section-intro--center">
+    <div class="section-intro" style="max-width:720px; margin-bottom:48px;">
       <span class="kicker">Choose your route</span>
       <h2 class="section-h">Technology, managed expertise, or both.</h2>
-      <p class="section-sub">Every organization works differently. Metolius gives you options &mdash; not a prescription.</p>
+      <p class="section-sub">Every organization works differently. Metolius gives you options &mdash; not a prescription. Here&rsquo;s what each route looks like in practice.</p>
     </div>
     <div class="route-grid">
-      <a class="route" href="#">
+      <a class="route route--live" href="#">
         <span class="route__eyebrow">For credentialing teams</span>
         <h3>Credentialing &amp; enrollment technology</h3>
         <p>Bring provider information, tasks and progress into one place. Give your team the tools to manage credentialing with greater visibility and control.</p>
+        <div class="route__ui">
+          <div class="route__ui-row"><span class="route__ui-dot route__ui-dot--go"></span><span>Primary-source verification</span><span class="route__ui-meta">running</span></div>
+          <div class="route__ui-row"><span class="route__ui-dot route__ui-dot--go"></span><span>Payer enrollment</span><span class="route__ui-meta">running</span></div>
+          <div class="route__ui-row"><span class="route__ui-dot route__ui-dot--go"></span><span>Attestation &amp; signatures</span><span class="route__ui-meta">running</span></div>
+        </div>
         <span class="btn btn--link">Explore the platform</span>
       </a>
-      <a class="route" href="#">
+      <a class="route route--live" href="#">
         <span class="route__eyebrow">For operations leaders</span>
         <h3>Managed credentialing services</h3>
         <p>Work with experienced credentialing professionals who understand the detail, deadlines and demands of keeping providers ready.</p>
+        <div class="route__ui">
+          <div class="route__ui-row"><span class="route__ui-avatar">SM</span><span>Sarah M. &middot; Lead specialist</span><span class="route__ui-meta">your team</span></div>
+          <div class="route__ui-row"><span class="route__ui-avatar">DK</span><span>David K. &middot; Payer liaison</span><span class="route__ui-meta">your team</span></div>
+          <div class="route__ui-row"><span class="route__ui-avatar">AR</span><span>Aisha R. &middot; QA &amp; audit</span><span class="route__ui-meta">your team</span></div>
+        </div>
         <span class="btn btn--link">Explore managed services</span>
       </a>
-      <a class="route" href="#">
+      <a class="route route--live" href="#">
         <span class="route__eyebrow">For CFOs &amp; finance</span>
         <h3>Revenue cycle management</h3>
         <p>Support the financial side of healthcare operations with services that help manage billing, claims and reimbursement.</p>
+        <div class="route__ui">
+          <div class="route__ui-metric"><span>Revenue exposure</span><span class="route__ui-val">$284k</span></div>
+          <div class="route__ui-metric"><span>Claims blocked</span><span class="route__ui-val">12</span></div>
+          <div class="route__ui-metric"><span>Days to clear</span><span class="route__ui-val">&lt;10</span></div>
+        </div>
         <span class="btn btn--link">Explore revenue cycle</span>
       </a>
-      <a class="route" href="#">
+      <a class="route route--live" href="#">
         <span class="route__eyebrow">For enterprise healthcare</span>
         <h3>Enterprise provider readiness</h3>
         <p>A leadership-level operating model for provider readiness across multi-site organizations and health systems.</p>
+        <div class="route__ui">
+          <div class="route__ui-site"><span>North Campus</span><span class="route__ui-bar"><span style="width:96%;"></span></span><span class="route__ui-val">96%</span></div>
+          <div class="route__ui-site"><span>West Region</span><span class="route__ui-bar"><span style="width:91%;"></span></span><span class="route__ui-val">91%</span></div>
+          <div class="route__ui-site"><span>Specialty Group</span><span class="route__ui-bar"><span style="width:88%;"></span></span><span class="route__ui-val">88%</span></div>
+        </div>
         <span class="btn btn--link">Request a briefing</span>
       </a>
     </div>
@@ -430,11 +450,11 @@
   <div class="container">
     <div class="section-intro" style="max-width:760px; margin-bottom:40px;">
       <span class="kicker">The quiet advantage</span>
-      <h2 class="section-h">Verified once. Reused everywhere Metolius operates.</h2>
+      <h2 class="section-h">Credentialing work compounds, instead of starting from zero.</h2>
       <p class="section-sub">
-        Every hire shouldn&rsquo;t start from zero. Metolius builds a persistent,
+        Every hire shouldn&rsquo;t begin with a blank form. Metolius builds a persistent,
         audit-ready profile for every provider &mdash; so the next organization, the next
-        payer, the next renewal starts from eighty percent complete, not blank.
+        payer, the next renewal starts at eighty percent complete, not zero.
       </p>
     </div>
     <div class="moat">
@@ -467,8 +487,10 @@
   </div>
 </section>
 
-<!-- ============ SECTION 7 — Metolius River brand moment (NEW) ============ -->
-<section class="river-band">
+<!-- ============ SECTION 7 — Metolius River brand moment ============ -->
+<section class="river-band" role="img" aria-label="Metolius River — placeholder for approved photography">
+  <div class="river-band__img" aria-hidden="true"></div>
+  <div class="river-band__scrim" aria-hidden="true"></div>
   <div class="river-band__inner">
     <span class="river-band__eyebrow">The Metolius principle</span>
     <h2 class="river-band__h">Flow where it should. Catch what matters.</h2>
@@ -478,7 +500,7 @@
       confident about where everything stands.
     </p>
   </div>
-  <span class="river-band__placeholder-tag">Approved Metolius River photography &middot; placeholder</span>
+  <span class="river-band__placeholder-tag">Hero slot &middot; approved Metolius River photography (full-bleed, 1600&times;640 recommended)</span>
 </section>
 
 <!-- ============ SECTION 8 — Differentiation (NEW, from Competitor PDF) ============ -->
@@ -521,7 +543,7 @@
 <!-- ============ SECTION 9 — Leadership view ============ -->
 <section class="section section--tight">
   <div class="container">
-    <div class="section-intro section-intro--center">
+    <div class="section-intro" style="max-width:720px; margin-bottom:40px;">
       <span class="kicker">Leadership view</span>
       <h2 class="section-h">The bigger picture, without the reporting marathon.</h2>
       <p class="section-sub">
@@ -565,7 +587,7 @@
 <!-- ============ SECTION 10 — Proof / trust ============ -->
 <section id="why" class="section section--soft">
   <div class="container">
-    <div class="section-intro section-intro--center">
+    <div class="section-intro" style="max-width:720px; margin-bottom:40px;">
       <span class="kicker">Proof</span>
       <h2 class="section-h">Experience matters. So does trust.</h2>
       <p class="section-sub">Healthcare organizations rely on accurate information, dependable processes and people who understand the responsibility that comes with the work.</p>
