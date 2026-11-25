@@ -1240,6 +1240,24 @@ p { margin: 0; }
   /* belt-and-braces body overflow lock */
   html, body { overflow-x: hidden; max-width: 100%; }
 
+  /* Clamp the big hero headlines so they can't push their grid tracks wider than the viewport.
+     These are set inline per-page so we fight that with !important. */
+  .hero-A__h, .hero-B__h {
+    font-size: clamp(32px, 9vw, 44px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+    max-width: 100% !important;
+    word-break: break-word;
+  }
+  .hero-A__sub, .hero-B__sub,
+  .hero-A p, .hero-B p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    max-width: 100% !important;
+  }
+  /* Make hero grid cells fill width, not stretch via content */
+  .hero-A__grid > *, .hero-B__grid > * { min-width: 0; max-width: 100%; }
+
   /* Button row: full-width stacked buttons on mobile */
   .btn-row { flex-direction: column; align-items: stretch; gap: 10px; }
   .btn { justify-content: center; }
