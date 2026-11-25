@@ -1220,6 +1220,9 @@ p { margin: 0; }
     padding: 10px 14px !important;
   }
   .ui-card { max-width: 100%; overflow-x: hidden; }
+
+  /* At tablet, .grid-2 should still breathe (2-col) — only flatten the gap. */
+  .grid-2 { gap: 32px; }
   .ui-row > div:nth-child(n+4) { display: none; }
   .ui-row--head > div:nth-child(n+4) { display: none; }
   .ui-provider { gap: 8px; }
@@ -1266,6 +1269,24 @@ p { margin: 0; }
   /* MOAT nodes wrap */
   .moat__nodes { gap: 6px; }
   .moat__node { font-size: 12px; padding: 6px 10px; }
+
+  /* .grid-2 — the generic 2-col intro grid — stacks on mobile */
+  .grid-2 { grid-template-columns: 1fr !important; gap: 32px !important; }
+
+  /* Inline repeat(N,1fr) grids in A/B stack to 1-col on mobile */
+  [style*="grid-template-columns:repeat(5"],
+  [style*="grid-template-columns: repeat(5"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  [style*="grid-template-columns:repeat(4"],
+  [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Pill rows in ui-card headers wrap on mobile */
+  .ui-card__header { flex-wrap: wrap; gap: 10px; padding: 14px 16px; }
+  .ui-card__header > div { flex-wrap: wrap; gap: 6px !important; }
+  .pill { font-size: 11px; padding: 4px 8px; }
 
   /* Confess (B-specific) */
   .confess { padding: 32px 20px; }
