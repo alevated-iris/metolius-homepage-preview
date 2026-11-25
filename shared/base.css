@@ -381,6 +381,433 @@ p { margin: 0; }
   color: #7A8CA3;
 }
 
+/* ---------- Feature pop-out system (v2) ----------
+ * Reachboost-inspired: each feature is its own small product moment
+ * on a soft terrain, arranged irregularly so the eye wanders.
+ */
+.popout-field {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(80px, auto);
+  gap: 20px;
+  padding: 32px 0 48px;
+}
+.popout-field::before {
+  /* soft terrain: two radial lights evoking the brief's river/mountain colours */
+  content: '';
+  position: absolute; inset: -40px -24px;
+  background:
+    radial-gradient(ellipse 60% 55% at 20% 30%, rgba(69, 233, 254, 0.18) 0%, rgba(69, 233, 254, 0) 60%),
+    radial-gradient(ellipse 55% 60% at 82% 72%, rgba(160, 228, 188, 0.22) 0%, rgba(160, 228, 188, 0) 60%),
+    radial-gradient(ellipse 40% 40% at 55% 20%, rgba(252, 229, 176, 0.35) 0%, rgba(252, 229, 176, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+.popout {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.popout__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.popout__label::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+}
+.popout__title {
+  font-size: 16.5px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  margin: 0;
+}
+.popout__body {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  margin: 0;
+}
+.popout__ui {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* Specific pop-out visual moments */
+.popout-mini-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  font-size: 12.5px;
+}
+.popout-mini-row__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.popout-mini-row__name { font-weight: 600; color: var(--ink); flex: 1; }
+.popout-mini-row__meta { color: var(--ink-3); font-size: 11.5px; }
+
+.popout-spark {
+  display: flex; align-items: flex-end; gap: 4px;
+  height: 54px; padding: 4px 0;
+}
+.popout-spark__bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--cyan) 0%, var(--blue) 100%);
+  border-radius: 3px 3px 0 0;
+  min-height: 8px;
+  opacity: 0.85;
+}
+.popout-spark__bar--muted { background: var(--surface-3); }
+
+.popout-ring {
+  position: relative;
+  width: 100%;
+  height: 110px;
+  display: flex; align-items: center; justify-content: center;
+}
+.popout-ring__core {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--navy) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: #FFF; font-size: 20px; font-weight: 700;
+  box-shadow: 0 8px 24px -8px rgba(5, 36, 70, 0.35);
+  z-index: 2;
+}
+.popout-ring__orbit {
+  position: absolute; inset: 0;
+  border: 1px dashed var(--line); border-radius: 50%;
+}
+.popout-ring__node {
+  position: absolute;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #FFF;
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700;
+  color: var(--ink-2);
+  box-shadow: var(--shadow-1);
+}
+.popout-ring__node--1 { top: 6px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #A0E4BC, #2E8E5A); color: #FFF; }
+.popout-ring__node--2 { top: 36%; right: 6px; background: linear-gradient(135deg, #FCE5B0, #D97B2A); color: #FFF; }
+.popout-ring__node--3 { bottom: 10px; right: 20%; background: linear-gradient(135deg, #45E9FE, #0164CB); color: #FFF; }
+.popout-ring__node--4 { bottom: 10px; left: 20%; background: #FFF; }
+.popout-ring__node--5 { top: 36%; left: 6px; background: #FFF; }
+
+.popout-notif {
+  display: flex; gap: 10px;
+  padding: 10px 12px;
+  background: var(--navy);
+  color: #FFF;
+  border-radius: var(--radius);
+  align-items: center;
+}
+.popout-notif__icon {
+  width: 24px; height: 24px; border-radius: 6px;
+  background: var(--status-attention);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.popout-notif__text { font-size: 12.5px; line-height: 1.3; }
+.popout-notif__text strong { font-weight: 700; display: block; }
+.popout-notif__text span { color: #AFC1D6; }
+
+.popout-timeline {
+  display: flex; flex-direction: column; gap: 6px;
+  padding-left: 14px;
+  border-left: 2px solid var(--accent);
+  position: relative;
+}
+.popout-timeline__step {
+  font-size: 12px;
+  color: var(--ink-2);
+  position: relative;
+}
+.popout-timeline__step::before {
+  content: '';
+  position: absolute; left: -19px; top: 4px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px #FFF;
+}
+.popout-timeline__step--done { color: var(--status-complete); }
+.popout-timeline__step--done::before { background: var(--status-complete); }
+.popout-timeline__step--muted { color: var(--ink-3); }
+.popout-timeline__step--muted::before { background: var(--line); }
+
+/* ---------- River brand band (v2) ----------
+ * Standalone brand moment: approved Metolius River photography placeholder.
+ * The brief explicitly forbids substituting generic river photography, so
+ * this ships as a labelled placeholder until Nicola supplies the library.
+ */
+.river-band {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(5, 36, 70, 0.35) 0%, rgba(5, 36, 70, 0) 50%, rgba(5, 36, 70, 0.4) 100%),
+    linear-gradient(135deg, #45E9FE 0%, #00AEE6 35%, #0164CB 70%, #052446 100%);
+}
+.river-band::before {
+  /* subtle flow lines evoking the river */
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(115deg, transparent 0 60px, rgba(255,255,255,0.03) 60px 61px),
+    repeating-linear-gradient(95deg,  transparent 0 90px, rgba(255,255,255,0.04) 90px 91px);
+  pointer-events: none;
+}
+.river-band__inner {
+  position: relative;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  color: #FFFFFF;
+}
+.river-band__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #BFE5B9;
+  margin-bottom: 20px;
+}
+.river-band__eyebrow::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: #BFE5B9; border-radius: 2px;
+}
+.river-band__h {
+  font-size: 40px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+  margin: 0 0 20px;
+}
+.river-band__sub {
+  font-size: 17.5px;
+  line-height: 1.55;
+  max-width: 48ch;
+  color: #E4EFF9;
+  margin: 0;
+}
+.river-band__placeholder-tag {
+  position: absolute;
+  bottom: 16px; right: 24px;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* ---------- MOAT / network visual (v2) ----------
+ * "Verified once. Reused everywhere."  Two-column before/after moat visual.
+ */
+.moat {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  box-shadow: var(--shadow-2);
+}
+.moat__col h4 {
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 14px; font-weight: 700;
+}
+.moat__col--before h4 { color: var(--status-attention); }
+.moat__col--after h4 { color: var(--status-complete); }
+.moat__nodes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.moat__node {
+  padding: 8px 6px;
+  text-align: center;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-2);
+  position: relative;
+}
+.moat__node--data { background: var(--accent-soft); color: var(--status-progress); }
+.moat__arrow {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #FFF;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700;
+  box-shadow: 0 10px 24px -8px rgba(5, 36, 70, 0.35);
+}
+.moat__caption {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin: 10px 0 0;
+}
+
+/* ---------- Journey strip (v2) ---------- */
+.journey {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  position: relative;
+}
+.journey::before {
+  content: '';
+  position: absolute;
+  top: 36px; left: 8%; right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 2px;
+  z-index: 0;
+}
+.journey__step {
+  position: relative;
+  z-index: 1;
+  background: #FFF;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 56px 20px 20px;
+  text-align: center;
+}
+.journey__num {
+  position: absolute;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: #FFF;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 15px;
+}
+.journey__step h4 {
+  font-size: 16px; font-weight: 600; margin: 0 0 6px;
+}
+.journey__step p {
+  font-size: 13px; color: var(--ink-3); line-height: 1.4; margin: 0;
+}
+
+/* ---------- Comparison split (Metolius vs typical incumbent) ---------- */
+.vs-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.vs-split__col { padding: 32px 36px; }
+.vs-split__col--them {
+  background: var(--surface-2);
+  border-right: 1px solid var(--line);
+}
+.vs-split__eyebrow {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 700; margin: 0 0 12px;
+}
+.vs-split__col--them .vs-split__eyebrow { color: var(--ink-3); }
+.vs-split__col--us .vs-split__eyebrow { color: var(--accent); }
+.vs-split__h {
+  font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
+  margin: 0 0 14px; line-height: 1.25;
+}
+.vs-split__list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.vs-split__list li {
+  font-size: 14.5px; line-height: 1.45; color: var(--ink-2);
+  padding-left: 22px; position: relative;
+}
+.vs-split__list li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.vs-split__col--them .vs-split__list li::before { background: var(--line); }
+.vs-split__col--us .vs-split__list li::before { background: var(--status-complete); box-shadow: 0 0 0 3px #E4F5EB; }
+
+/* ---------- Confessions teaser ---------- */
+.confess {
+  background: var(--navy);
+  color: #FFFFFF;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+.confess__meta {
+  padding: 44px 44px 40px;
+  background: linear-gradient(135deg, var(--navy) 0%, #0A2F58 100%);
+}
+.confess__num {
+  font-size: 11px; letter-spacing: 0.14em; font-weight: 700;
+  color: #7FA8D8; text-transform: uppercase; margin-bottom: 14px;
+}
+.confess__kicker {
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #BFE5B9; font-weight: 700; margin-bottom: 20px;
+}
+.confess__h {
+  font-size: 28px; font-weight: 600; letter-spacing: -0.015em;
+  line-height: 1.2; margin: 0 0 16px;
+}
+.confess__meta p {
+  color: #AFC1D6; font-size: 14.5px; line-height: 1.5;
+}
+.confess__quote {
+  padding: 44px 48px;
+  display: flex; flex-direction: column; justify-content: center;
+  background: #0A2F58;
+}
+.confess__quote blockquote {
+  font-size: 24px; line-height: 1.35; font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  margin: 0 0 24px;
+  max-width: 30ch;
+}
+.confess__quote cite {
+  font-style: normal;
+  font-size: 13px;
+  color: #7FA8D8;
+  letter-spacing: 0.04em;
+}
+
 /* ---------- Direction badge (preview only) ---------- */
 .direction-badge {
   position: fixed;

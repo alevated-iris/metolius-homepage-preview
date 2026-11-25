@@ -3,18 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Metolius — Direction A: Product voice</title>
+  <title>Metolius — Direction A (v2): Product-led, revised</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../shared/tokens.css">
   <link rel="stylesheet" href="../shared/base.css">
   <style>
-    /* Direction A specifics — product-led hero uses the product UI as the primary visual. */
+    /* Direction A v2 specifics —
+     * Nicola 11/19 asks folded in:
+     *  - keep product focus (hero still product-led)
+     *  - bring B's gradient feel (warm-sun + mint + river-blue, approved palette)
+     *  - more platform feature pop-outs in varied elements (reachboost pattern)
+     *  - Metolius River brand moment
+     *  - buyer/sales/demo journey consideration (GTM PDF)
+     *  - Medallion differentiation (competitor landscape PDF)
+     */
     .hero-A {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(180deg, #F6F9FC 0%, #FFFFFF 70%);
+      background:
+        radial-gradient(ellipse 65% 60% at 85% 20%, rgba(252, 229, 176, 0.55) 0%, rgba(252, 229, 176, 0) 60%),
+        radial-gradient(ellipse 60% 55% at 8% 85%, rgba(160, 228, 188, 0.45) 0%, rgba(160, 228, 188, 0) 60%),
+        radial-gradient(ellipse 45% 50% at 50% 10%, rgba(69, 233, 254, 0.18) 0%, rgba(69, 233, 254, 0) 60%),
+        linear-gradient(180deg, #FBFDFE 0%, #FFFFFF 70%);
       border-bottom: 1px solid var(--line);
     }
     .hero-A .container { position: relative; }
@@ -41,19 +53,28 @@
       font-weight: 600;
       color: var(--ink);
       display: flex; align-items: center; gap: 8px;
+      z-index: 3;
     }
     .hero-A__ui-callout::before {
       content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
     }
-    .hero-A__ui-callout--1 { top: -20px; right: 32px; }
-    .hero-A__ui-callout--2 { bottom: -22px; left: 32px; background: var(--warm-sun); border-color: #E5C27A; }
+    .hero-A__ui-callout--1 { top: -28px; right: 28px; }
+    .hero-A__ui-callout--2 {
+      bottom: -28px; left: 28px;
+      background: var(--warm-sun); border-color: #E5C27A;
+    }
     .hero-A__ui-callout--2::before { background: var(--status-attention); }
+    .hero-A__ui-callout--3 {
+      top: 48%; right: -24px;
+      background: var(--navy); color: #FFF; border-color: var(--navy);
+    }
+    .hero-A__ui-callout--3::before { background: var(--mint); }
   </style>
 </head>
-<body data-direction="A" data-direction-name="Product-led — see the work first">
+<body data-direction="A" data-direction-name="Product-led — revised v2">
 <div id="nav-mount"></div>
 
-<!-- ============ HERO (Product voice) ============ -->
+<!-- ============ HERO (Product voice, revised) ============ -->
 <section class="hero-A section--hero">
   <div class="container">
     <div class="hero-A__grid">
@@ -65,7 +86,7 @@
         </p>
         <div class="btn-row">
           <a class="btn btn--primary" href="#platform">See how Metolius works</a>
-          <a class="btn btn--ghost" href="#cta">Explore the platform</a>
+          <a class="btn btn--ghost" href="#journey">Take the tour</a>
         </div>
         <div style="margin-top:36px; display:flex; gap:28px; color:var(--ink-3); font-size:13px; letter-spacing:0.04em;">
           <span>SOC 2 Type II</span>
@@ -87,7 +108,7 @@
             <div>Aetna</div>
             <div>Credentialing</div>
             <div><span class="pill pill--complete">Complete</span></div>
-            <div style="color:var(--ink-3);">—</div>
+            <div style="color:var(--ink-3);">&mdash;</div>
           </div>
           <div class="ui-row">
             <div class="ui-provider"><span class="ui-avatar ui-avatar--b">DK</span><div><div style="font-weight:600;">David Kwon, DO</div><div style="color:var(--ink-3); font-size:12px;">Cardiology</div></div></div>
@@ -115,11 +136,12 @@
             <div>Molina</div>
             <div>Credentialing</div>
             <div><span class="pill pill--complete">Complete</span></div>
-            <div style="color:var(--ink-3);">—</div>
+            <div style="color:var(--ink-3);">&mdash;</div>
           </div>
         </div>
-        <div class="hero-A__ui-callout hero-A__ui-callout--1">Status updated · 2 min ago</div>
+        <div class="hero-A__ui-callout hero-A__ui-callout--1">Status updated &middot; 2 min ago</div>
         <div class="hero-A__ui-callout hero-A__ui-callout--2">3 items need attention</div>
+        <div class="hero-A__ui-callout hero-A__ui-callout--3">Dr. Patel &middot; license expires 14d</div>
       </div>
     </div>
   </div>
@@ -140,15 +162,15 @@
           a simple question becomes a search mission.
         </p>
         <p style="font-size:19px; line-height:1.55; color:var(--ink-2); max-width:54ch; margin:16px 0 0;">
-          Metolius brings the work into one place — so your team spends less time
-          piecing information together, and more time making decisions.
+          Metolius brings the work into one place &mdash; so your team spends less time
+          piecing information together, and more time keeping providers ready.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTION 3 — Workflow / see the work ============ -->
+<!-- ============ SECTION 3 — See the work (workflow card) ============ -->
 <section id="platform" class="section section--soft">
   <div class="container">
     <div class="section-intro" style="max-width:720px; margin-bottom:56px;">
@@ -163,7 +185,7 @@
 
     <div class="ui-card" style="max-width:none;">
       <div class="ui-card__header">
-        <div class="ui-card__title">Workflow · Credentialing pipeline — Q4 cohort</div>
+        <div class="ui-card__title">Workflow &middot; Credentialing pipeline &mdash; Q4 cohort</div>
         <div style="display:flex; gap:8px;">
           <span class="pill pill--complete">42 Complete</span>
           <span class="pill pill--progress">87 In progress</span>
@@ -198,39 +220,172 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="feature-grid feature-grid--4" style="margin-top:48px;">
-      <div class="feature feature--filled">
-        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
-        <h3 class="card-h">See what matters</h3>
-        <p>Know what&rsquo;s complete and what still needs attention.</p>
+<!-- ============ SECTION 3.5 — Feature pop-out field (NEW, reachboost-inspired) ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-intro" style="max-width:760px; margin-bottom:12px;">
+      <span class="kicker">Inside the platform</span>
+      <h2 class="section-h">Varied features. One connected view.</h2>
+      <p class="section-sub">
+        A glimpse of the capabilities that keep provider readiness moving &mdash;
+        verification, roster management, enrollment tracking, exception handling,
+        audit trails and the signals that surface when something needs a decision.
+      </p>
+    </div>
+
+    <div class="popout-field">
+      <!-- 1. Verification radar -->
+      <div class="popout" style="grid-column: 1 / span 4; grid-row: 1 / span 2;">
+        <span class="popout__label">Primary-source verification</span>
+        <h3 class="popout__title">Credentials verified against trusted sources, continuously.</h3>
+        <div class="popout__ui">
+          <div class="popout-timeline">
+            <div class="popout-timeline__step popout-timeline__step--done">NPDB &middot; verified 2m ago</div>
+            <div class="popout-timeline__step popout-timeline__step--done">DEA &middot; verified 4m ago</div>
+            <div class="popout-timeline__step">State board &middot; checking&hellip;</div>
+            <div class="popout-timeline__step popout-timeline__step--muted">OIG &middot; next sweep 6h</div>
+          </div>
+        </div>
       </div>
-      <div class="feature feature--filled">
-        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
-        <h3 class="card-h">Keep work moving</h3>
-        <p>Tasks, deadlines and follow-ups in one place.</p>
+
+      <!-- 2. Live exception notification -->
+      <div class="popout" style="grid-column: 5 / span 4; grid-row: 1 / span 1;">
+        <span class="popout__label">Exception surfacing</span>
+        <h3 class="popout__title">Only the things that actually need a human.</h3>
+        <div class="popout__ui">
+          <div class="popout-notif">
+            <div class="popout-notif__icon">!</div>
+            <div class="popout-notif__text">
+              <strong>Verification mismatch</strong>
+              <span>Dr. Patel &middot; address of record vs application</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="feature feature--filled">
-        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="11" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M14 20c0-2 2-3 4-3s4 1 4 3"/></svg></div>
-        <h3 class="card-h">Stay connected</h3>
-        <p>A shared view of provider progress across the team.</p>
+
+      <!-- 3. Roster upload -->
+      <div class="popout" style="grid-column: 9 / span 4; grid-row: 1 / span 1;">
+        <span class="popout__label">Roster management</span>
+        <h3 class="popout__title">Drop a roster. It&rsquo;s already on its way.</h3>
+        <div class="popout__ui">
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-complete);"></span>
+            <span class="popout-mini-row__name">Q4_providers.csv</span>
+            <span class="popout-mini-row__meta">38 added</span>
+          </div>
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-progress);"></span>
+            <span class="popout-mini-row__name">Assign owners</span>
+            <span class="popout-mini-row__meta">in progress</span>
+          </div>
+        </div>
       </div>
-      <div class="feature feature--filled">
-        <div class="feature__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18V6M10 18v-7M16 18V9M22 18v-4"/></svg></div>
-        <h3 class="card-h">Decide with context</h3>
-        <p>Understand the work without chasing updates.</p>
+
+      <!-- 4. Shared trust / network -->
+      <div class="popout" style="grid-column: 5 / span 4; grid-row: 2 / span 2;">
+        <span class="popout__label">Shared verification network</span>
+        <h3 class="popout__title">Verified once. Reused everywhere Metolius operates.</h3>
+        <div class="popout__ui">
+          <div class="popout-ring">
+            <div class="popout-ring__orbit"></div>
+            <div class="popout-ring__core">M</div>
+            <div class="popout-ring__node popout-ring__node--1">H1</div>
+            <div class="popout-ring__node popout-ring__node--2">St</div>
+            <div class="popout-ring__node popout-ring__node--3">Pr</div>
+            <div class="popout-ring__node popout-ring__node--4">H2</div>
+            <div class="popout-ring__node popout-ring__node--5">Pay</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Analytics snapshot -->
+      <div class="popout" style="grid-column: 9 / span 4; grid-row: 2 / span 2;">
+        <span class="popout__label">Leadership reporting</span>
+        <h3 class="popout__title">Cycle time, readiness, revenue exposure &mdash; without the report wait.</h3>
+        <div class="popout__ui">
+          <div class="popout-spark">
+            <div class="popout-spark__bar" style="height: 30%;"></div>
+            <div class="popout-spark__bar" style="height: 45%;"></div>
+            <div class="popout-spark__bar" style="height: 55%;"></div>
+            <div class="popout-spark__bar" style="height: 48%;"></div>
+            <div class="popout-spark__bar" style="height: 68%;"></div>
+            <div class="popout-spark__bar" style="height: 78%;"></div>
+            <div class="popout-spark__bar" style="height: 95%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--ink-3);">
+            <span>Ready to work</span>
+            <span style="color:var(--status-complete); font-weight:700;">94% &uarr;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Audit trail -->
+      <div class="popout" style="grid-column: 1 / span 4; grid-row: 3 / span 1;">
+        <span class="popout__label">Audit trail</span>
+        <h3 class="popout__title">Every change, every decision &mdash; time-stamped.</h3>
+        <div class="popout__ui">
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--ink-3);"></span>
+            <span class="popout-mini-row__name">Owner reassigned</span>
+            <span class="popout-mini-row__meta">P. Chen &middot; 09:22</span>
+          </div>
+          <div class="popout-mini-row">
+            <span class="popout-mini-row__dot" style="background: var(--status-complete);"></span>
+            <span class="popout-mini-row__name">Payer approved</span>
+            <span class="popout-mini-row__meta">BCBS &middot; 09:14</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTION 4 — Audience routing ============ -->
+<!-- ============ SECTION 4 — Buyer / sales / demo journey (NEW, from GTM PDF) ============ -->
+<section id="journey" class="section section--soft">
+  <div class="container">
+    <div class="section-intro" style="max-width:720px; margin-bottom:48px;">
+      <span class="kicker">How buyers experience Metolius</span>
+      <h2 class="section-h">Learn at your own pace. Move when you&rsquo;re ready.</h2>
+      <p class="section-sub">
+        No gated demos to see the product. No sales pressure before the fit is clear.
+        Four steps you can take in any order &mdash; or all the way through in a single afternoon.
+      </p>
+    </div>
+    <div class="journey">
+      <div class="journey__step">
+        <div class="journey__num">1</div>
+        <h4>See the product</h4>
+        <p>Tour live workflow, readiness and reporting views on this site &mdash; no form, no wait.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">2</div>
+        <h4>Readiness assessment</h4>
+        <p>A short, practical diagnostic across visibility, exceptions, ownership and reporting.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">3</div>
+        <h4>Walk-through with the team</h4>
+        <p>A working session against your actual providers, payers and cycle shape.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">4</div>
+        <h4>Scoped pilot</h4>
+        <p>A limited-scope pilot with measurable outcomes before any commitment at scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 5 — Audience routing (keep, trimmed) ============ -->
 <section id="solutions" class="section">
   <div class="container">
     <div class="section-intro section-intro--center">
       <span class="kicker">Choose your route</span>
       <h2 class="section-h">Technology, managed expertise, or both.</h2>
-      <p class="section-sub">Every organization works differently. Metolius gives you options — not a prescription.</p>
+      <p class="section-sub">Every organization works differently. Metolius gives you options &mdash; not a prescription.</p>
     </div>
     <div class="route-grid">
       <a class="route" href="#">
@@ -261,96 +416,113 @@
   </div>
 </section>
 
-<!-- ============ SECTION 5 — People + technology ============ -->
-<section id="who" class="section section--soft">
+<!-- ============ SECTION 6 — MOAT / network effect (NEW, from MOAT PDF) ============ -->
+<section class="section section--soft">
   <div class="container">
-    <div class="grid-7-5">
-      <div>
-        <span class="kicker">People and technology</span>
-        <h2 class="section-h">Technology surfaces what matters. Experience decides what happens next.</h2>
-        <p class="section-sub">
-          Credentialing is detailed work. It takes knowledge, good judgment and an
-          understanding of how healthcare organizations operate. Metolius combines
-          technology with the experience of people who know this work — whether
-          you&rsquo;re using our platform or working directly with our team.
-        </p>
-        <a class="btn btn--link" href="#">Get to know Metolius</a>
-      </div>
-      <div>
-        <div class="photo photo--people"></div>
-      </div>
+    <div class="section-intro" style="max-width:760px; margin-bottom:40px;">
+      <span class="kicker">The quiet advantage</span>
+      <h2 class="section-h">Verified once. Reused everywhere Metolius operates.</h2>
+      <p class="section-sub">
+        Every hire shouldn&rsquo;t start from zero. Metolius builds a persistent,
+        audit-ready profile for every provider &mdash; so the next organization, the next
+        payer, the next renewal starts from eighty percent complete, not blank.
+      </p>
     </div>
-  </div>
-</section>
-
-<!-- ============ SECTION 6 — Intelligence (perspective) ============ -->
-<section class="section section--dark">
-  <div class="container">
-    <div class="grid-5-7">
-      <div>
-        <span class="kicker" style="color:#7FA8D8;">Intelligence that behaves</span>
-        <h2 class="section-h">AI can identify an exception. Experience still decides what to do about it.</h2>
-        <p class="section-sub">
-          Metolius surfaces outstanding actions, approaching deadlines and areas
-          that need a closer look. The system notices. Your team decides.
-        </p>
-      </div>
-      <div>
-        <div class="ui-card" style="background:#0A2F58; border-color:#153E6B;">
-          <div class="ui-card__header" style="background:#0A2F58; border-color:#153E6B;">
-            <div class="ui-card__title" style="color:#FFF;">Needs attention · Prioritized</div>
-            <div class="ui-dots"><span></span><span></span><span></span></div>
-          </div>
-          <div style="padding: 0 20px;">
-            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="color:#FFF; font-weight:600;">Payer response overdue</div>
-                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">BCBS WA · 3 providers · last contact 11 days ago</div>
-              </div>
-              <span class="pill pill--attention">High</span>
-            </div>
-            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="color:#FFF; font-weight:600;">License expiring in 14 days</div>
-                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">Dr. Patel · renewal not yet submitted</div>
-              </div>
-              <span class="pill pill--attention">High</span>
-            </div>
-            <div style="padding:18px 0; border-bottom: 1px solid #153E6B; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="color:#FFF; font-weight:600;">Verification mismatch</div>
-                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">Primary source data doesn&rsquo;t match application</div>
-              </div>
-              <span class="pill pill--progress">Review</span>
-            </div>
-            <div style="padding:18px 0; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="color:#FFF; font-weight:600;">New provider roster upload</div>
-                <div style="color:#AFC1D6; font-size:13px; margin-top:4px;">12 providers added · assign owners</div>
-              </div>
-              <span class="pill pill--progress">Review</span>
-            </div>
-          </div>
+    <div class="moat">
+      <div class="moat__col moat__col--before">
+        <h4>Today &middot; the market</h4>
+        <div class="moat__nodes">
+          <div class="moat__node">Hospital</div>
+          <div class="moat__node">Staffing</div>
+          <div class="moat__node">Payer</div>
+          <div class="moat__node">Clinic</div>
+          <div class="moat__node">Telehealth</div>
+          <div class="moat__node">MSO</div>
         </div>
+        <p class="moat__caption">Every provider&rsquo;s data re-entered, re-verified, re-chased &mdash; six times, ten times, every hire.</p>
+      </div>
+      <div class="moat__arrow">&rarr;</div>
+      <div class="moat__col moat__col--after">
+        <h4>With Metolius</h4>
+        <div class="moat__nodes">
+          <div class="moat__node moat__node--data">Provider profile</div>
+          <div class="moat__node moat__node--data">Verified history</div>
+          <div class="moat__node moat__node--data">Reusable attestation</div>
+          <div class="moat__node">Hospital</div>
+          <div class="moat__node">Payer</div>
+          <div class="moat__node">Clinic</div>
+        </div>
+        <p class="moat__caption">One verified profile. Shared trust. Time collapses on every new relationship.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTION 7 — Leadership view ============ -->
+<!-- ============ SECTION 7 — Metolius River brand moment (NEW) ============ -->
+<section class="river-band">
+  <div class="river-band__inner">
+    <span class="river-band__eyebrow">The Metolius principle</span>
+    <h2 class="river-band__h">Flow where it should. Catch what matters.</h2>
+    <p class="river-band__sub">
+      The Metolius River moves without hurry and without stopping. That&rsquo;s the
+      kind of operation credentialing teams deserve: steady, visible, and
+      confident about where everything stands.
+    </p>
+  </div>
+  <span class="river-band__placeholder-tag">Approved Metolius River photography &middot; placeholder</span>
+</section>
+
+<!-- ============ SECTION 8 — Differentiation (NEW, from Competitor PDF) ============ -->
 <section class="section">
+  <div class="container">
+    <div class="section-intro" style="max-width:760px; margin-bottom:40px;">
+      <span class="kicker">A different promise</span>
+      <h2 class="section-h">Automation is table stakes. Accountability is the point.</h2>
+      <p class="section-sub">
+        Most credentialing platforms can tell you what&rsquo;s in progress. Fewer can
+        confidently explain what&rsquo;s blocking provider readiness, who owns the next
+        action, and where operational or revenue exposure is building.
+      </p>
+    </div>
+    <div class="vs-split">
+      <div class="vs-split__col vs-split__col--them">
+        <div class="vs-split__eyebrow">The typical platform</div>
+        <h3 class="vs-split__h">Automated credentialing at scale.</h3>
+        <ul class="vs-split__list">
+          <li>Workflows run; exceptions queue silently.</li>
+          <li>Reporting ships as CSV &mdash; shape it yourself.</li>
+          <li>Account contact rotates; context resets.</li>
+          <li>&ldquo;AI-powered&rdquo; replaces visibility into what&rsquo;s actually happening.</li>
+        </ul>
+      </div>
+      <div class="vs-split__col vs-split__col--us">
+        <div class="vs-split__eyebrow">Metolius</div>
+        <h3 class="vs-split__h">Provider readiness infrastructure. Visibility, control, confidence.</h3>
+        <ul class="vs-split__list">
+          <li>Every exception has an owner, a next action and a last-touched timestamp.</li>
+          <li>Reporting is live &mdash; readiness, cycle time and revenue exposure, always current.</li>
+          <li>Your Metolius specialists stay with your account across renewals.</li>
+          <li>Intelligence surfaces what deserves attention. Experience decides what to do about it.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 9 — Leadership view ============ -->
+<section class="section section--tight">
   <div class="container">
     <div class="section-intro section-intro--center">
       <span class="kicker">Leadership view</span>
       <h2 class="section-h">The bigger picture, without the reporting marathon.</h2>
       <p class="section-sub">
-        Provider readiness, outstanding work and operational exposure — shown
+        Provider readiness, outstanding work and operational exposure &mdash; shown
         at the right altitude for the people answering the question.
       </p>
     </div>
     <div class="ui-card">
       <div class="ui-card__header">
-        <div class="ui-card__title">Provider readiness · Dashboard</div>
+        <div class="ui-card__title">Provider readiness &middot; Dashboard</div>
         <div style="display:flex; gap:12px; font-size:13px; color:var(--ink-3);">
           <span>Last updated 4 min ago</span>
         </div>
@@ -359,12 +531,12 @@
         <div style="padding:28px; background:#FFF;">
           <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Ready to work</div>
           <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">94%</div>
-          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">▲ 2.1% vs Oct</div>
+          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">&#9650; 2.1% vs Oct</div>
         </div>
         <div style="padding:28px; background:#FFF;">
           <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Cycle time (avg)</div>
           <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">38d</div>
-          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">▼ 6d vs Q3</div>
+          <div style="font-size:13px; color:var(--status-complete); margin-top:6px;">&#9660; 6d vs Q3</div>
         </div>
         <div style="padding:28px; background:#FFF;">
           <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Revenue exposure</div>
@@ -374,14 +546,14 @@
         <div style="padding:28px; background:#FFF;">
           <div style="font-size:13px; color:var(--ink-3); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px;">Expiring in 30d</div>
           <div style="font-size:38px; font-weight:700; letter-spacing:-0.02em;">18</div>
-          <div style="font-size:13px; color:var(--ink-3); margin-top:6px;">8 licenses · 10 payer enrollments</div>
+          <div style="font-size:13px; color:var(--ink-3); margin-top:6px;">8 licenses &middot; 10 payer enrollments</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTION 8 — Proof / trust ============ -->
+<!-- ============ SECTION 10 — Proof / trust ============ -->
 <section id="why" class="section section--soft">
   <div class="container">
     <div class="section-intro section-intro--center">
@@ -414,7 +586,7 @@
   </div>
 </section>
 
-<!-- ============ SECTION 9 — Final CTA ============ -->
+<!-- ============ SECTION 11 — Final CTA ============ -->
 <section id="cta" class="section section--dark">
   <div class="container">
     <div class="section-intro section-intro--center" style="text-align:center;">
