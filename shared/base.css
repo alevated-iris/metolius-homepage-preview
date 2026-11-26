@@ -1570,3 +1570,7 @@ body.nav-open { overflow: hidden; }
     border-top: 1px solid #E5EBF0;
   }
 }
+
+/* ---------- hidden attribute must win over explicit display on .journey ---------- */
+.journey[hidden] { display: none !important; }
+
