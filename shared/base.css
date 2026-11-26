@@ -181,8 +181,33 @@ p { margin: 0; }
   font-weight: 700;
   font-size: 18px;
   letter-spacing: -0.02em;
+  color: #1A2E3B;
+  text-decoration: none;
 }
 .nav__logo svg { width: 28px; height: 28px; }
+
+/* ---------- Metolius wordmark (bold serif, stand-in until real SVG arrives) ---------- */
+.m-logo--wordmark {
+  font-family: 'Fraunces', 'Freight Text Pro', 'Tiempos Text', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-variation-settings: "opsz" 60;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: #1A2E3B;
+}
+.m-logo--wordmark sup {
+  font-size: 0.42em;
+  font-weight: 500;
+  vertical-align: super;
+  margin-left: 2px;
+  position: relative;
+  top: -0.15em;
+}
+.nav__logo .m-logo--wordmark { font-size: 22px; }
+/* Footer uses inverted color context */
+.footer .m-logo--wordmark { color: #FFFFFF; }
+.footer .nav__logo { color: #FFFFFF; }
 .nav__links { display: flex; align-items: center; gap: 28px; }
 .nav__links a {
   font-size: var(--t-nav);

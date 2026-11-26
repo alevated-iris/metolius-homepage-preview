@@ -3,19 +3,19 @@
  * No framework. No build step.
  */
 
+// Metolius wordmark — stand-in matched to Nicola's real brand (bold editorial
+// serif, dark navy ~#1A2E3B, with ® mark). The real logo SVG hasn't been sent
+// yet; this is a typeset stand-in using Fraunces (GF, SIL OFL licensed) pinned
+// to the correct weight + color so the pages read with the correct brand
+// gravitas. Swap for the official asset the moment Nicola sends it.
 const METOLIUS_LOGO_SVG = `
-<svg class="m-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M8 36 L18 20 L24 28 L32 16 L40 36 Z" fill="#A0E4BC"/>
-  <circle cx="36" cy="12" r="5" fill="#FCE5B0"/>
-  <path d="M4 40 C14 36, 22 42, 34 38 C40 36, 44 40, 44 40 L44 44 L4 44 Z" fill="#00AEE6"/>
-</svg>`;
+<span class="m-logo m-logo--wordmark" aria-hidden="true">Metolius<sup>®</sup></span>`;
 
 const NAV_HTML = `
 <nav class="nav" aria-label="Primary">
   <div class="container nav__inner">
     <a class="nav__logo" href="#" aria-label="Metolius Health">
       ${METOLIUS_LOGO_SVG}
-      <span>Metolius</span>
     </a>
     <div class="nav__links">
       <a href="#platform">Platform</a>
@@ -57,7 +57,6 @@ const FOOTER_HTML = `
       <div>
         <a class="nav__logo" href="#" style="color:#fff;">
           ${METOLIUS_LOGO_SVG}
-          <span>Metolius</span>
         </a>
         <p style="margin-top:20px; max-width:34ch; font-size:14.5px; line-height:1.6;">
           Human expertise. Intelligent tools. Provider readiness, simplified.
