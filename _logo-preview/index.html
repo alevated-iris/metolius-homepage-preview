@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bridge 99 logo exploration</title>
+<style>
+  body { font-family: -apple-system, 'Inter', system-ui, sans-serif; background: #FBFDFE; margin: 0; padding: 48px; color: #0A2540; }
+  h1 { font-size: 20px; font-weight: 700; margin: 0 0 24px; }
+  h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #5E7B99; margin: 32px 0 12px; }
+  .row { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .swatch { background: #FFF; border: 1px solid #E6EEF5; border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: center; min-width: 220px; min-height: 72px; }
+  .swatch--dark { background: #0A2540; }
+  .swatch--brand { background: linear-gradient(135deg, #1D4ED8 0%, #2AA3C9 100%); }
+  .tiny { font-size: 11px; color: #5E7B99; margin-top: 6px; text-align: center; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+
+<h1>Bridge 99 — logo exploration v1</h1>
+
+<h2>Concept A: 99 monogram + wordmark + hairline span</h2>
+<div class="row">
+  <div>
+    <div class="swatch">
+      <!-- Primary -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 50" width="170" height="50" role="img" aria-label="Bridge 99">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#1D4ED8"/>
+            <stop offset="1" stop-color="#2AA3C9"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="14" cy="18" r="8"/>
+          <path d="M22 18 L22 34"/>
+          <circle cx="42" cy="18" r="8"/>
+          <path d="M50 18 L50 34"/>
+        </g>
+        <line x1="2" y1="42" x2="62" y2="42" stroke="#0A2540" stroke-width="2" stroke-linecap="square"/>
+        <line x1="8" y1="42" x2="8" y2="46" stroke="#0A2540" stroke-width="2"/>
+        <line x1="32" y1="42" x2="32" y2="46" stroke="#0A2540" stroke-width="2"/>
+        <line x1="56" y1="42" x2="56" y2="46" stroke="#0A2540" stroke-width="2"/>
+        <text x="74" y="30" font-family="Inter, system-ui" font-size="18" font-weight="700" letter-spacing="-0.02em" fill="#0A2540">Bridge<tspan dx="4" fill="url(#g1)">99</tspan></text>
+      </svg>
+    </div>
+    <div class="tiny">A1 · primary on white</div>
+  </div>
+
+  <div>
+    <div class="swatch swatch--dark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 50" width="170" height="50">
+        <defs>
+          <linearGradient id="g1b" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#7AB5FF"/>
+            <stop offset="1" stop-color="#45E9FE"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#g1b)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="14" cy="18" r="8"/>
+          <path d="M22 18 L22 34"/>
+          <circle cx="42" cy="18" r="8"/>
+          <path d="M50 18 L50 34"/>
+        </g>
+        <line x1="2" y1="42" x2="62" y2="42" stroke="#FFF" stroke-width="2" stroke-linecap="square"/>
+        <line x1="8" y1="42" x2="8" y2="46" stroke="#FFF" stroke-width="2"/>
+        <line x1="32" y1="42" x2="32" y2="46" stroke="#FFF" stroke-width="2"/>
+        <line x1="56" y1="42" x2="56" y2="46" stroke="#FFF" stroke-width="2"/>
+        <text x="74" y="30" font-family="Inter, system-ui" font-size="18" font-weight="700" letter-spacing="-0.02em" fill="#FFF">Bridge<tspan dx="4" fill="url(#g1b)">99</tspan></text>
+      </svg>
+    </div>
+    <div class="tiny">A2 · primary on dark</div>
+  </div>
+</div>
+
+<h2>Concept B: wordmark + inline span motif (no monogram)</h2>
+<div class="row">
+  <div>
+    <div class="swatch">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" width="220" height="40">
+        <text x="0" y="24" font-family="Inter, system-ui" font-size="22" font-weight="700" letter-spacing="-0.025em" fill="#0A2540">Bridge 99</text>
+        <line x1="0" y1="33" x2="120" y2="33" stroke="#1D4ED8" stroke-width="2"/>
+        <line x1="4" y1="33" x2="4" y2="36" stroke="#0A2540" stroke-width="2"/>
+        <line x1="60" y1="33" x2="60" y2="36" stroke="#0A2540" stroke-width="2"/>
+        <line x1="116" y1="33" x2="116" y2="36" stroke="#0A2540" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="tiny">B1 · wordmark with span underline</div>
+  </div>
+</div>
+
+<h2>Concept C: ultra-minimal monogram only (favicon / app-icon)</h2>
+<div class="row">
+  <div>
+    <div class="swatch" style="min-width:120px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 56" width="72" height="56">
+        <defs>
+          <linearGradient id="gc1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#1D4ED8"/>
+            <stop offset="1" stop-color="#2AA3C9"/>
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke="url(#gc1)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="10"/>
+          <path d="M28 18 L28 40"/>
+          <circle cx="54" cy="18" r="10"/>
+          <path d="M64 18 L64 40"/>
+        </g>
+        <line x1="4" y1="48" x2="68" y2="48" stroke="#0A2540" stroke-width="2.5" stroke-linecap="square"/>
+        <line x1="10" y1="48" x2="10" y2="53" stroke="#0A2540" stroke-width="2.5"/>
+        <line x1="36" y1="48" x2="36" y2="53" stroke="#0A2540" stroke-width="2.5"/>
+        <line x1="62" y1="48" x2="62" y2="53" stroke="#0A2540" stroke-width="2.5"/>
+      </svg>
+    </div>
+    <div class="tiny">C · monogram only (favicon)</div>
+  </div>
+
+  <div>
+    <div class="swatch swatch--brand" style="min-width:120px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 56" width="72" height="56">
+        <g fill="none" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="10"/>
+          <path d="M28 18 L28 40"/>
+          <circle cx="54" cy="18" r="10"/>
+          <path d="M64 18 L64 40"/>
+        </g>
+        <line x1="4" y1="48" x2="68" y2="48" stroke="#FFF" stroke-width="2.5" stroke-linecap="square"/>
+        <line x1="10" y1="48" x2="10" y2="53" stroke="#FFF" stroke-width="2.5"/>
+        <line x1="36" y1="48" x2="36" y2="53" stroke="#FFF" stroke-width="2.5"/>
+        <line x1="62" y1="48" x2="62" y2="53" stroke="#FFF" stroke-width="2.5"/>
+      </svg>
+    </div>
+    <div class="tiny">C · reversed on brand</div>
+  </div>
+</div>
+
+<h2>Context: lockup under nav + as hero eyebrow replacement</h2>
+<div class="swatch" style="min-width: 600px; align-items: flex-start; flex-direction: column; padding: 32px;">
+  <div style="display:flex; align-items:center; gap: 10px;">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+      <circle cx="10" cy="10" r="3.5" fill="#1D4ED8"/>
+    </svg>
+    <span style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#5E7B99; font-weight:600;">Bridge 99</span>
+    <span style="width:32px; height:1px; background:#1D4ED8;"></span>
+    <span style="font-size:12px; letter-spacing:0.08em; color:#5E7B99;">Full-service credentialing</span>
+  </div>
+  <div style="font-size: 44px; font-weight: 700; letter-spacing:-0.025em; line-height:1.05; margin-top: 16px; max-width: 580px;">
+    See every provider's credentialing status in one place.
+  </div>
+</div>
+
+</body>
+</html>
