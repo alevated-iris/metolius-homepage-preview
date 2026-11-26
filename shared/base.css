@@ -1184,6 +1184,12 @@ body.nav-open { overflow: hidden; }
   /* Nav: shrink link set, keep CTA */
   .nav__links { gap: 20px; font-size: 14px; }
 
+  /* Footer: 5-col -> 2-col at tablet */
+  .footer__grid {
+    grid-template-columns: 2fr 1fr 1fr !important;
+    gap: 36px !important;
+  }
+
   /* Hero grids go column at tablet so the product card + copy breathe.
      !important because each hero's inline <style> block defines these at
      the same specificity and wins source order; the responsive floor has
@@ -1396,4 +1402,15 @@ body.nav-open { overflow: hidden; }
 
   /* Popout UI chip bits */
   .popout-ring { transform: scale(0.85); transform-origin: left top; margin-bottom: -40px; }
+
+  /* Footer: 5-col -> 1-col */
+  .footer__grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .footer__meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
 }
