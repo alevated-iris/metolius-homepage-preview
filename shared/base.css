@@ -1439,3 +1439,134 @@ body.nav-open { overflow: hidden; }
     align-items: flex-start;
   }
 }
+
+/* ---------- Journey tabs (buyer / sales / demo) ---------- */
+.journey-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.journey-tab {
+  text-align: left;
+  background: #FFFFFF;
+  border: 1px solid #E5EBF0;
+  border-radius: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.journey-tab:hover { border-color: #C3D1DD; }
+.journey-tab__kicker {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5E7B99;
+  font-weight: 700;
+}
+.journey-tab__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0A2540;
+  letter-spacing: -0.015em;
+}
+.journey-tab__sub {
+  font-size: 13.5px;
+  color: #5E7B99;
+  line-height: 1.4;
+}
+.journey-tab--active {
+  border-color: #1D4ED8;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.08);
+}
+.journey-tab--active .journey-tab__title { color: #1D4ED8; }
+
+@media (max-width: 720px) {
+  .journey-tabs { grid-template-columns: 1fr; }
+}
+
+/* ---------- Medallion contrast (new) ---------- */
+.contrast-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #E5EBF0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+.contrast-col {
+  padding: 28px 28px 32px;
+}
+.contrast-col + .contrast-col {
+  border-left: 1px solid #E5EBF0;
+}
+.contrast-col--metolius {
+  background: linear-gradient(180deg, #F5FAFE 0%, #FFFFFF 60%);
+}
+.contrast-col__name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #5E7B99;
+  margin-bottom: 14px;
+}
+.contrast-col--metolius .contrast-col__name { color: #1D4ED8; }
+.contrast-col__h {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0A2540;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0 0 18px;
+}
+.contrast-col__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contrast-col__list li {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #334B63;
+  padding-left: 26px;
+  position: relative;
+}
+.contrast-col__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #E5EBF0;
+}
+.contrast-col--metolius .contrast-col__list li::before {
+  background: #1D4ED8;
+}
+.contrast-col__foot {
+  margin-top: 22px;
+  font-size: 12.5px;
+  color: #5E7B99;
+  font-style: italic;
+}
+
+@media (max-width: 720px) {
+  .contrast-grid { grid-template-columns: 1fr; }
+  .contrast-col + .contrast-col {
+    border-left: none;
+    border-top: 1px solid #E5EBF0;
+  }
+}

@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/tokens.css?v=20261125-wordmark">
-  <link rel="stylesheet" href="../shared/base.css?v=20261125-wordmark">
+  <link rel="stylesheet" href="../shared/tokens.css?v=20261126-journey">
+  <link rel="stylesheet" href="../shared/base.css?v=20261126-journey">
   <style>
     /* Direction A v2 specifics —
      * Nicola 11/19 asks folded in:
@@ -352,18 +352,37 @@
   </div>
 </section>
 
-<!-- ============ SECTION 4 — Buyer / sales / demo journey (NEW, from GTM PDF) ============ -->
+<!-- ============ SECTION 4 — Three journeys: buyer / sales / demo (NEW, from GTM PDF) ============ -->
 <section id="journey" class="section section--soft">
   <div class="container">
     <div class="section-intro" style="max-width:720px; margin-bottom:48px;">
-      <span class="kicker">How buyers experience Metolius</span>
+      <span class="kicker">Three ways to experience Metolius</span>
       <h2 class="section-h">Learn at your own pace. Move when you&rsquo;re ready.</h2>
       <p class="section-sub">
         No gated demos to see the product. No sales pressure before the fit is clear.
-        Four steps you can take in any order &mdash; or all the way through in a single afternoon.
+        Three paths depending on where you are &mdash; take any one, or walk all three.
       </p>
     </div>
-    <div class="journey">
+
+    <div class="journey-tabs" role="tablist" aria-label="Choose a path">
+      <button class="journey-tab journey-tab--active" role="tab" aria-selected="true" data-tab="buyer">
+        <span class="journey-tab__kicker">Path 1</span>
+        <span class="journey-tab__title">Buyer</span>
+        <span class="journey-tab__sub">Learn on your own, no form, no wait.</span>
+      </button>
+      <button class="journey-tab" role="tab" aria-selected="false" data-tab="sales">
+        <span class="journey-tab__kicker">Path 2</span>
+        <span class="journey-tab__title">Sales conversation</span>
+        <span class="journey-tab__sub">Fit, scope, pricing &mdash; with a human.</span>
+      </button>
+      <button class="journey-tab" role="tab" aria-selected="false" data-tab="demo">
+        <span class="journey-tab__kicker">Path 3</span>
+        <span class="journey-tab__title">Live demo</span>
+        <span class="journey-tab__sub">See it against your own providers.</span>
+      </button>
+    </div>
+
+    <div class="journey" id="journey-buyer" role="tabpanel">
       <div class="journey__step">
         <div class="journey__num">1</div>
         <h4>See the product</h4>
@@ -383,6 +402,52 @@
         <div class="journey__num">4</div>
         <h4>Scoped pilot</h4>
         <p>A limited-scope pilot with measurable outcomes before any commitment at scale.</p>
+      </div>
+    </div>
+
+    <div class="journey" id="journey-sales" role="tabpanel" hidden>
+      <div class="journey__step">
+        <div class="journey__num">1</div>
+        <h4>Fit call &mdash; 20 minutes</h4>
+        <p>Your situation, your cycle shape, where the bottleneck actually lives. No deck.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">2</div>
+        <h4>Scope &amp; pricing</h4>
+        <p>What you&rsquo;d turn on, what you&rsquo;d keep, what it costs. Written, not spoken.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">3</div>
+        <h4>Reference conversation</h4>
+        <p>A credentialing leader at a similar organisation, on a direct call. No performance.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">4</div>
+        <h4>Paper + pilot</h4>
+        <p>MSA, SOW and a scoped pilot anchored in measurable outcomes.</p>
+      </div>
+    </div>
+
+    <div class="journey" id="journey-demo" role="tabpanel" hidden>
+      <div class="journey__step">
+        <div class="journey__num">1</div>
+        <h4>Bring your roster</h4>
+        <p>Send a provider list in whatever shape it&rsquo;s already in. CSV, HRIS export, spreadsheet.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">2</div>
+        <h4>We stand it up</h4>
+        <p>Your own tenant, your real providers, inside 48 hours. Not a sandbox.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">3</div>
+        <h4>Working session</h4>
+        <p>Walk the readiness view, exception queue and reporting against your actual data.</p>
+      </div>
+      <div class="journey__step">
+        <div class="journey__num">4</div>
+        <h4>Decide from evidence</h4>
+        <p>Keep the tenant or close it. Either way, you&rsquo;ve seen it on your providers, not ours.</p>
       </div>
     </div>
   </div>
@@ -617,6 +682,48 @@
   </div>
 </section>
 
+<!-- ============ SECTION 10.5 — Medallion contrast (NEW, from MOAT + competitor PDF) ============ -->
+<section id="why-metolius-not-medallion" class="section">
+  <div class="container">
+    <div class="section-intro" style="max-width:720px; margin-bottom:36px;">
+      <span class="kicker">Honest comparison</span>
+      <h2 class="section-h">The difference isn&rsquo;t a feature list. It&rsquo;s how we operate.</h2>
+      <p class="section-sub">
+        Medallion is a capable platform. Where we&rsquo;re different is the people behind it:
+        the credentialing team that works with you, not next to you.
+      </p>
+    </div>
+    <div class="contrast-grid">
+      <div class="contrast-col">
+        <div class="contrast-col__name">Medallion</div>
+        <h3 class="contrast-col__h">Platform-first. You run it.</h3>
+        <ul class="contrast-col__list">
+          <li>SaaS tool your team configures and operates day to day.</li>
+          <li>Support available; execution sits with your credentialers.</li>
+          <li>You own ramp, exceptions, payer back-and-forth and reporting.</li>
+          <li>Fast to buy; your team learns the work alongside the product.</li>
+        </ul>
+        <div class="contrast-col__foot">
+          Good fit for teams with mature credentialing ops and bandwidth to run the tool.
+        </div>
+      </div>
+      <div class="contrast-col contrast-col--metolius">
+        <div class="contrast-col__name">Metolius</div>
+        <h3 class="contrast-col__h">Platform plus the team that runs it with you.</h3>
+        <ul class="contrast-col__list">
+          <li>You handle the 1%. We handle the other 99% &mdash; credentialing, enrolment, exceptions, payer follow-up.</li>
+          <li>A named credentialing lead who knows your providers, your payers and your cycle.</li>
+          <li>Readiness, reporting and audit trail come with the service, not as an extra configuration project.</li>
+          <li>Slower to buy; much faster to outcomes once you&rsquo;re in.</li>
+        </ul>
+        <div class="contrast-col__foot">
+          Built for teams who&rsquo;d rather own decisions than tickets.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ SECTION 11 — Final CTA ============ -->
 <section id="cta" class="section section--dark">
   <div class="container">
@@ -632,6 +739,6 @@
 </section>
 
 <div id="footer-mount"></div>
-<script src="../shared/shell.js?v=20261125-wordmark"></script>
+<script src="../shared/shell.js?v=20261126-journey"></script>
 </body>
 </html>

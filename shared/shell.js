@@ -142,8 +142,31 @@ function wireBurger() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 }
 
+function wireJourneyTabs() {
+  const tabs = document.querySelectorAll('.journey-tab');
+  if (!tabs.length) return;
+  const panels = {
+    buyer: document.getElementById('journey-buyer'),
+    sales: document.getElementById('journey-sales'),
+    demo: document.getElementById('journey-demo'),
+  };
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => {
+        t.classList.toggle('journey-tab--active', t === tab);
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+      });
+      Object.entries(panels).forEach(([key, el]) => {
+        if (el) el.hidden = key !== target;
+      });
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const d = document.body.dataset;
   if (d.direction) injectShell(d.direction, d.directionName || '', d.directionNote || '');
   wireBurger();
+  wireJourneyTabs();
 });
