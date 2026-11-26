@@ -28,6 +28,24 @@ const NAV_HTML = `
       <a class="btn btn--ghost" href="#">Sign in</a>
       <a class="btn btn--primary" href="#cta">Talk to Metolius</a>
     </div>
+    <button class="nav__burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile-panel">
+      <span class="nav__burger-bar"></span>
+      <span class="nav__burger-bar"></span>
+      <span class="nav__burger-bar"></span>
+    </button>
+  </div>
+  <div class="nav__mobile-panel" id="nav-mobile-panel" hidden>
+    <div class="container">
+      <a href="#platform">Platform</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#who">Who we serve</a>
+      <a href="#insights">Insights</a>
+      <a href="#why">Why Metolius</a>
+      <div class="nav__mobile-cta">
+        <a class="btn btn--ghost" href="#">Sign in</a>
+        <a class="btn btn--primary" href="#cta">Talk to Metolius</a>
+      </div>
+    </div>
   </div>
 </nav>
 `;
@@ -102,7 +120,31 @@ function injectShell(direction, name, note) {
   document.body.appendChild(badge);
 }
 
+function wireBurger() {
+  const burger = document.getElementById('nav-burger');
+  const panel = document.getElementById('nav-mobile-panel');
+  if (!burger || !panel) return;
+  const close = () => {
+    burger.setAttribute('aria-expanded', 'false');
+    burger.classList.remove('is-open');
+    panel.hidden = true;
+    document.body.classList.remove('nav-open');
+  };
+  const open = () => {
+    burger.setAttribute('aria-expanded', 'true');
+    burger.classList.add('is-open');
+    panel.hidden = false;
+    document.body.classList.add('nav-open');
+  };
+  burger.addEventListener('click', () => {
+    (burger.getAttribute('aria-expanded') === 'true') ? close() : open();
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const d = document.body.dataset;
   if (d.direction) injectShell(d.direction, d.directionName || '', d.directionNote || '');
+  wireBurger();
 });
